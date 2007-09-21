@@ -73,18 +73,22 @@
 #define SHA1_H
 
 //---------------------------------------------------------------------- 
-//C/C++ includes
+//typedefs
 
-/*
- * If you do not have the ISO standard stdint.h header file, then you
- * must typdef the following:
- *     name                  meaning
- *  uint32_t         unsigned 32 bit integer
- *  uint8_t          unsigned 8 bit integer (i.e., unsigned char)
- *  int_least16_t    integer of >= 16 bits
- *
+/**
+ * unsigned 32 bit integer
  */
-#include <stdint.h>
+typedef unsigned int uint32_t;
+
+/**
+ * unsigned 8 bit integer (i.e., unsigned char)
+ */
+typedef unsigned char uint8_t;
+
+/**
+ * integer of >= 16 bits
+ */
+typedef short int_least16_t;
 
 //---------------------------------------------------------------------- 
 //enums
