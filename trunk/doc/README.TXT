@@ -129,6 +129,7 @@ should work with every C++ compiler. It was tested on the following systems
 which are official supported:
 
 	FreeBSD 6.2 with g++ 3.4.6
+	Microsoft Windows XP with Microsoft Visual C++ 2005 Express Edition
 
 -------------------------------------------------------------------------------	
 
