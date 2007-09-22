@@ -1,5 +1,5 @@
 /* 
- * hhashlib++ - a simple hash library for C++
+ * hashlib++ - a simple hash library for C++
  * 
  * Copyright (c) 2007 Benjamin Grüdelbach
  * 
