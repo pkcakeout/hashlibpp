@@ -99,10 +99,9 @@ static unsigned char PADDING[64] = {
 #define H(x, y, z) ((x) ^ (y) ^ (z))
 #define I(x, y, z) ((y) ^ ((x) | (~z)))
 
-/* ROTATE_LEFT rotates x left n bits. */
-//#define ROTATE_LEFT(x, n) (((x) << (n)) | ((x) >> (32-(n))))
 /*
- * does this fit the problems on 64 bit systems?
+ * ROTATE_LEFT rotates x left n bits. 
+ * cast to unsigned int to guarantee support for 64Bit System
  */
 #define ROTATE_LEFT(x, n) (((x) << (n)) | (( (unsigned int) x) >> (32-(n))))
 
