@@ -36,7 +36,7 @@ section 7) and therefore free software.
 
 1) Current version
 
-The current stable version of hashlib++ is:  0.1 rc 1
+The current stable version of hashlib++ is:  0.1
 
 -------------------------------------------------------------------------------	
 
@@ -130,6 +130,7 @@ which are official supported:
 
 	FreeBSD 6.2 with g++ 3.4.6
 	Microsoft Windows XP with Microsoft Visual C++ 2005 Express Edition
+	Gnu/Linux 2.6 with g++ 3.4.6
 
 -------------------------------------------------------------------------------	
 
