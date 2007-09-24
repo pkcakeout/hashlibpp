@@ -40,6 +40,10 @@
 #include "sha1wrapper.h"
 #include "sha1.h"
 
+//---------------------------------------------------------------------- 
+//STL includes
+#include <sstream>
+
 //----------------------------------------------------------------------	
 //private memberfunctions
 
@@ -67,16 +71,29 @@ std::string sha1wrapper::hashIt(void)
  */  
 std::string sha1wrapper::convToString(unsigned char *data)
 {
-	char asciihash[41];
-
-	int p = 0;
-	for(int i=0; i<20; i++)
+	std::ostringstream os;
+	for(int i=0; i<20; ++i)
 	{
-		::sprintf(&asciihash[p],"%02x",data[i]);
-		p += 2;
+		/*
+		 * set the width to 2
+		 */
+		os.width(2);
+
+		/*
+		 * fill with 0
+		 */
+		os.fill('0');
+
+		/*
+		 * conv to hex
+		 */
+		os << std::hex << static_cast<unsigned int>(data[i]);
 	}
-	asciihash[40] = '\0';
-	return std::string(asciihash);
+
+	/*
+	 * return as std::string
+	 */
+	return os.str();
 }
 
 /**

@@ -40,6 +40,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 //---------------------------------------------------------------------- 
 //hashlib++ includes
@@ -74,16 +75,33 @@ std::string md5wrapper::hashIt(void)
  */  
 std::string md5wrapper::convToString(unsigned char *bytes)
 {
-	char asciihash[33];
-
-	int p = 0;
-	for(int i=0; i<16; i++)
+	/*
+	 * using a ostringstream to convert the hash in a
+	 * hex string
+	 */
+	std::ostringstream os;
+	for(int i=0; i<16; ++i)
 	{
-		::sprintf(&asciihash[p],"%02x",bytes[i]);
-		p += 2;
-	}	
-	asciihash[32] = '\0';
-	return std::string(asciihash);
+		/*
+		 * set the width to 2
+		 */
+		os.width(2);
+
+		/*
+		 * fill with 0
+		 */
+		os.fill('0');
+
+		/*
+		 * conv to hex
+		 */
+		os << std::hex << static_cast<unsigned int>(bytes[i]);
+	}
+
+	/*
+	 * return as std::string
+	 */
+	return os.str();
 }
 
 /**
