@@ -36,7 +36,7 @@ section 7) and therefore free software.
 
 1) Current version
 
-The current stable version of hashlib++ is:  0.1
+The current stable version of hashlib++ is:  HEAD
 
 -------------------------------------------------------------------------------	
 
@@ -45,8 +45,9 @@ The current stable version of hashlib++ is:  0.1
 hashlib++ is in a very early state, thus only two functions are supported at the
 moment:
 
-	* MD5	Message-Digest algorithm 5
-	* SHA1  Secure Hash Algorithm 1
+	* MD5		Message-Digest algorithm 5
+	* SHA1  	Secure Hash Algorithm 1
+	* SHA256 	Secure Hash Algorithm 256
 
 -------------------------------------------------------------------------------	
 
@@ -81,12 +82,19 @@ The library consist of the the following files:
 	* sha1wrapper.h and sha1wrapper.cpp
 	  These files represents the SHA1 wrapper. 
 	  Use this wrapper to easily create a SHA1 hash.
+
+        * sha256.h and sha256.cpp
+	  These two files implement the SHA256 algorithm. 
+	
+	* sha256wrapper.h and sha256wrapper.cpp
+	  These files represents the SHA256 wrapper. 
+	  Use this wrapper to easily create a SHA256 hash.
 	
 	* libtest.cpp
 	  This is a example program which shows how to 
 	  use hashlib++. The program expected a filename
-	  or a string and creates the SHA1 and MD5 hash
-	  of the given file or characters.
+	  or a string and creates the hashes of the given
+	  file or characters.
 
 -------------------------------------------------------------------------------	
 
@@ -232,6 +240,37 @@ http://hashlib2plus.sourceforge.net/
 	  NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION HEREIN
 	  WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
 	  MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+
+	* SHA256 implementation
+
+	  The hashlib++ SHA256 implementation is derivative from the
+	  sourcecode published by Aaron D. Gifford
+	  
+	  Copyright (c) 2000-2001, Aaron D. Gifford All rights reserved.
+	  
+	  Redistribution and use in source and binary forms, with or without
+	  modification, are permitted provided that the following conditions are
+	  met:
+	  1. Redistributions of source code must retain the above copyright
+	  notice, this list of conditions and the following disclaimer.  
+	  2. Redistributions in binary form must reproduce the above copyright
+	  notice, this list of conditions and the following disclaimer in the
+	  documentation and/or other materials provided with the distribution.
+	  3. Neither the name of the copyright holder nor the names of
+	  contributors may be used to endorse or promote products derived from
+	  this software without specific prior written permission.
+	  
+	  THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTOR(S) ``AS IS''
+	  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+	  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+	  PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTOR(S)
+       	  BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+	  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+	  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+	  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+	  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+       	  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+	  THE POSSIBILITY OF SUCH DAMAGE.
 	    
 -------------------------------------------------------------------------------	
 EOF
