@@ -29,40 +29,36 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	md5wrapper.cpp
+ *  @file 	sha1wrapper.cpp
  *  @brief	This file contains the implementation of the 
- *  		md5wrapper class
+ *  		sha1wrapper class
  *  @date 	Mo 17 Sep 2007
  */  
 
+//----------------------------------------------------------------------	
+//hashlib++ includes
+#include "hl_sha1wrapper.h"
+#include "hl_sha1.h"
+
 //---------------------------------------------------------------------- 
 //STL includes
-#include <string>
-#include <fstream>
-#include <iostream>
 #include <sstream>
 
-//---------------------------------------------------------------------- 
-//hashlib++ includes
-#include "md5wrapper.h"
-
-//---------------------------------------------------------------------- 
-//private member functions
+//----------------------------------------------------------------------	
+//private memberfunctions
 
 /**
  *  @brief 	This method ends the hash process
  *  		and returns the hash as string.
  *
- *  @return 	the hash as std::string
+ *  @return 	a hash as std::string
  */  
-std::string md5wrapper::hashIt(void)
+std::string sha1wrapper::hashIt(void)
 {
-	//create the hash
-	unsigned char buff[16] = "";	
-	md5->MD5Final((unsigned char*)buff,&ctx);
+	uint8_t Message_Digest[20];
+	sha1->SHA1Result(&context, Message_Digest);
 
-	//converte the hash to a string and return it
-	return convToString(buff);	
+	return convToString(Message_Digest);
 }
 
 /**
@@ -73,14 +69,10 @@ std::string md5wrapper::hashIt(void)
  *  @param 	data The hash-data to covert into HEX
  *  @return	the converted data as std::string
  */  
-std::string md5wrapper::convToString(unsigned char *bytes)
+std::string sha1wrapper::convToString(unsigned char *data)
 {
-	/*
-	 * using a ostringstream to convert the hash in a
-	 * hex string
-	 */
 	std::ostringstream os;
-	for(int i=0; i<16; ++i)
+	for(int i=0; i<20; ++i)
 	{
 		/*
 		 * set the width to 2
@@ -95,7 +87,7 @@ std::string md5wrapper::convToString(unsigned char *bytes)
 		/*
 		 * conv to hex
 		 */
-		os << std::hex << static_cast<unsigned int>(bytes[i]);
+		os << std::hex << static_cast<unsigned int>(data[i]);
 	}
 
 	/*
@@ -106,45 +98,43 @@ std::string md5wrapper::convToString(unsigned char *bytes)
 
 /**
  *  @brief 	This method adds the given data to the 
- *  		current hash context.
+ *  		current hash context
  *
  *  @param 	data The data to add to the current context
  *  @param 	len The length of the data to add
  */  
-void md5wrapper::updateContext(unsigned char *data, unsigned int len)
+void sha1wrapper::updateContext(unsigned char *data, unsigned int len)
 {
-	//update 
-	md5->MD5Update(&ctx, data, len);
+	sha1->SHA1Input(&context, data, len);
 }
 
 /**
  *  @brief 	This method resets the current hash context.
  *  		In other words: It starts a new hash process.
  */  
-void md5wrapper::resetContext(void)
+void sha1wrapper::resetContext(void)
 {
-	//init md5
-	md5->MD5Init(&ctx);
+	sha1->SHA1Reset(&context);
 }
 
-//---------------------------------------------------------------------- 
-//public member functions
+//----------------------------------------------------------------------	
+//public memberfunctions
 
 /**
  *  @brief 	default constructor
  */  
-md5wrapper::md5wrapper()
+sha1wrapper::sha1wrapper()
 {
-	md5 = new MD5();
+	this->sha1 = new SHA1();
 }
 
 /**
  *  @brief 	default destructor
  */  
-md5wrapper::~md5wrapper()
+sha1wrapper::~sha1wrapper()
 {
-	delete md5;
+	delete this->sha1;
 }
 
-//---------------------------------------------------------------------- 
+//----------------------------------------------------------------------
 //EOF

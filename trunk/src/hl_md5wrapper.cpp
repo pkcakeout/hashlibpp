@@ -27,29 +27,42 @@
  */
 
 //----------------------------------------------------------------------	
-//hashlib++ includes
-#include "sha256wrapper.h"
-#include "sha256.h"
 
-//----------------------------------------------------------------------	
+/**
+ *  @file 	md5wrapper.cpp
+ *  @brief	This file contains the implementation of the 
+ *  		md5wrapper class
+ *  @date 	Mo 17 Sep 2007
+ */  
+
+//---------------------------------------------------------------------- 
 //STL includes
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
-//----------------------------------------------------------------------	
-//private memberfunctions
+//---------------------------------------------------------------------- 
+//hashlib++ includes
+#include "hl_md5wrapper.h"
+
+//---------------------------------------------------------------------- 
+//private member functions
 
 /**
  *  @brief 	This method ends the hash process
  *  		and returns the hash as string.
  *
- *  @return 	a hash as std::string
+ *  @return 	the hash as std::string
  */  
-std::string sha256wrapper::hashIt(void)
+std::string md5wrapper::hashIt(void)
 {
-	uint8_t buff[SHA256_DIGEST_STRING_LENGTH];
-	sha256->SHA256_End(&context,(char*)buff);
+	//create the hash
+	unsigned char buff[16] = "";	
+	md5->MD5Final((unsigned char*)buff,&ctx);
 
-	return convToString(buff);
+	//converte the hash to a string and return it
+	return convToString(buff);	
 }
 
 /**
@@ -60,55 +73,78 @@ std::string sha256wrapper::hashIt(void)
  *  @param 	data The hash-data to covert into HEX
  *  @return	the converted data as std::string
  */  
-std::string sha256wrapper::convToString(unsigned char *data)
+std::string md5wrapper::convToString(unsigned char *bytes)
 {
 	/*
-	 * we can just copy data to a string, because 
-	 * the transforming to hash is already done
-	 * within the sha256 implementation
+	 * using a ostringstream to convert the hash in a
+	 * hex string
 	 */
-	return std::string((const char*)data);
+	std::ostringstream os;
+	for(int i=0; i<16; ++i)
+	{
+		/*
+		 * set the width to 2
+		 */
+		os.width(2);
+
+		/*
+		 * fill with 0
+		 */
+		os.fill('0');
+
+		/*
+		 * conv to hex
+		 */
+		os << std::hex << static_cast<unsigned int>(bytes[i]);
+	}
+
+	/*
+	 * return as std::string
+	 */
+	return os.str();
 }
 
 /**
  *  @brief 	This method adds the given data to the 
- *  		current hash context
+ *  		current hash context.
  *
  *  @param 	data The data to add to the current context
  *  @param 	len The length of the data to add
  */  
-void sha256wrapper::updateContext(unsigned char *data, unsigned int len)
+void md5wrapper::updateContext(unsigned char *data, unsigned int len)
 {
-	this->sha256->SHA256_Update(&context,data,len);
+	//update 
+	md5->MD5Update(&ctx, data, len);
 }
 
 /**
  *  @brief 	This method resets the current hash context.
  *  		In other words: It starts a new hash process.
  */  
-void sha256wrapper::resetContext(void)
+void md5wrapper::resetContext(void)
 {
-	sha256->SHA256_Init(&context);
+	//init md5
+	md5->MD5Init(&ctx);
 }
 
-//----------------------------------------------------------------------	
-//public memberfunctions
+//---------------------------------------------------------------------- 
+//public member functions
 
 /**
  *  @brief 	default constructor
  */  
-sha256wrapper::sha256wrapper()
+md5wrapper::md5wrapper()
 {
-	this->sha256 = new SHA256();	
+	md5 = new MD5();
 }
 
 /**
  *  @brief 	default destructor
  */  
-sha256wrapper::~sha256wrapper()
+md5wrapper::~md5wrapper()
 {
-	delete sha256;
+	delete md5;
 }
 
-//----------------------------------------------------------------------	
+//---------------------------------------------------------------------- 
 //EOF
