@@ -47,10 +47,10 @@
 
 //---------------------------------------------------------------------- 
 //hashlib++ includes
-#include "hl_hashwrapper.h"
-#include "hl_md5wrapper.h"
-#include "hl_sha1wrapper.h"
-#include "hl_sha256wrapper.h"
+#include <hl_hashwrapper.h>
+#include <hl_md5wrapper.h>
+#include <hl_sha1wrapper.h>
+#include <hl_sha256wrapper.h>
 
 //----------------------------------------------------------------------	
 //misc. includes
