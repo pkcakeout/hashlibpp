@@ -58,9 +58,13 @@ Section "" ;No components page, name is not important
   File hl_sha256wrapper.h
   
   ;Store installation folder
-  WriteRegStr HKCU "Software\hashlib++" "" $INSTDIR
+  WriteRegStr HKLM "Software\hashlib++" "" $INSTDIR
   
   ;Create uninstaller
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\hashlib++" "DisplayName" "hashlib++"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\hashlib++" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\hashlib++" "NoModify" 1
+  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\hashlib++" "NoRepair" 1
   WriteUninstaller "$INSTDIR\Uninstall.exe"
 
 SectionEnd ; end the section
@@ -82,6 +86,7 @@ Section "Uninstall"
 
   RMDir "$INSTDIR"
 
-  DeleteRegKey /ifempty HKCU "Software\hashlib++"
+  DeleteRegKey /ifempty HKLM "Software\hashlib++"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\hashlib++"
 
 SectionEnd
