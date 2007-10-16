@@ -1,5 +1,5 @@
-#include <hashwrapper.h>
-#include <md5wrapper.h>
+#include <hl_hashwrapper.h>
+#include <hl_md5wrapper.h>
 #include <string>
 
 /*

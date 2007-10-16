@@ -1,11 +1,11 @@
 #include <hl_hashwrapper.h>
-#include <hl_sha1wrapper.h>
+#include <hl_sha256wrapper.h>
 #include <string>
 
 /*
  * creating a wrapper object
  */
-hashwrapper *myWrapper = new sha1wrapper();
+hashwrapper *myWrapper = new sha256wrapper();
 
 /*
  * create a hash from a string

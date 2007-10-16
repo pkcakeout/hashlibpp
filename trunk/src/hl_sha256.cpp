@@ -243,6 +243,11 @@ const static sha2_word32 sha256_initial_hash_value[8] = {
 static const char *sha2_hex_digits = "0123456789abcdef";
 
 /*** SHA-256: *********************************************************/
+
+/**
+ *  @brief 	Initialize the context
+ *  @param	context The context to init.
+ */  
 void SHA256::SHA256_Init(SHA256_CTX* context) {
 	if (context == (SHA256_CTX*)0) {
 		return;
@@ -289,6 +294,11 @@ void SHA256::SHA256_Init(SHA256_CTX* context) {
 	(h) = T1 + Sigma0_256(a) + Maj((a), (b), (c)); \
 	j++
 
+/**
+ *  @brief 	Internal data transformation
+ *  @param	context The context to use
+ *  @param	data The data to transform	
+ */  
 void SHA256::SHA256_Transform(SHA256_CTX* context, const sha2_word32* data) {
 	sha2_word32	a, b, c, d, e, f, g, h, s0, s1;
 	sha2_word32	T1, *W256;
@@ -347,6 +357,11 @@ void SHA256::SHA256_Transform(SHA256_CTX* context, const sha2_word32* data) {
 
 #else /* SHA2_UNROLL_TRANSFORM */
 
+/**
+ *  @brief 	Internal data transformation
+ *  @param	context The context to use
+ *  @param	data The data to transform	
+ */  
 void SHA256::SHA256_Transform(SHA256_CTX* context, const sha2_word32* data) {
 	sha2_word32	a, b, c, d, e, f, g, h, s0, s1;
 	sha2_word32	T1, T2, *W256;
@@ -427,6 +442,12 @@ void SHA256::SHA256_Transform(SHA256_CTX* context, const sha2_word32* data) {
 
 #endif /* SHA2_UNROLL_TRANSFORM */
 
+/**
+ *  @brief	Updates the context 
+ *  @param	context The context to update.
+ *  @param	data The data for updating the context.
+ *  @param	len The length of the given data.
+ */  
 void SHA256::SHA256_Update(SHA256_CTX* context, const sha2_byte *data, unsigned int len) {
 	unsigned int	freespace, usedspace;
 
@@ -475,6 +496,11 @@ void SHA256::SHA256_Update(SHA256_CTX* context, const sha2_byte *data, unsigned 
 	usedspace = freespace = 0;
 }
 
+/**
+ *  @brief 	Finalize the sha256 operation
+ *  @param	digest The digest to finalize the operation with.
+ *  @param	context The context to finalize.
+ */  
 void SHA256::SHA256_Final(sha2_byte digest[], SHA256_CTX* context) {
 	sha2_word32	*d = (sha2_word32*)digest;
 	unsigned int	usedspace;
@@ -538,6 +564,13 @@ void SHA256::SHA256_Final(sha2_byte digest[], SHA256_CTX* context) {
 	usedspace = 0;
 }
 
+/**
+ *  @brief 	Ends the sha256 operation and return the
+ *  		created hash in the given buffer.
+ *  @param	context The context to end.
+ *  @param	buffer This OUT-Parameter contains the created
+ *  		hash after ending the operation.
+ */  
 char* SHA256::SHA256_End(SHA256_CTX* context, char buffer[]) {
 	sha2_byte	digest[SHA256_DIGEST_LENGTH], *d = digest;
 	int		i;

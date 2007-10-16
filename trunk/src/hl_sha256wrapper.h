@@ -63,10 +63,9 @@
  *
  *  		Have a look at the following example:
  *
- *  @include 	sha1example.cpp
- *  		TODO: change this example to SHA256
+ *  @include 	sha256example.cpp
  *
- *  		sha1wrapper implements resetContext(), updateContext()
+ *  		sha256wrapper implements resetContext(), updateContext()
  *  		and hashIt() to create a hash.
  */  
 class sha256wrapper : public hashwrapper

@@ -113,12 +113,23 @@ typedef uint32_t sha2_word32;
 typedef uint64_t sha2_word64;	
 
 /**
- * SHA265 context
+ * @brief This struct represents a SHA256-hash context
  */
 typedef struct SHA256_CTX 
 {
+	/**
+	 * state 
+	 */
 	uint32_t	state[8];
+
+	/**
+	 * bitcount
+	 */
 	uint64_t	bitcount;
+
+	/**
+	 * message buffer
+	 */
 	uint8_t		buffer[SHA256_BLOCK_LENGTH];
 } SHA256_CTX;
 
@@ -131,7 +142,7 @@ typedef struct SHA256_CTX
  *   		Basically the class provides three public member-functions
  *   		to create a hash:  SHA256_Init(), SHA256_Update() and SHA256_End().
  *   		If you want to create a hash based on a string or file quickly
- *   		you should use the sha1wrapper class instead of SHA1.
+ *   		you should use the sha256wrapper class instead of SHA256.
  */  
 class SHA256
 {
@@ -140,7 +151,6 @@ class SHA256
 
 		/**
 		 *  @brief 	Finalize the sha256 operation
-		 *  @author	Benjamin Grüdelbach
 		 *  @param	digest The digest to finalize the operation with.
 		 *  @param	context The context to finalize.
 		 */  
@@ -149,7 +159,6 @@ class SHA256
 
 		/**
 		 *  @brief 	Internal data transformation
-		 *  @author	Benjamin Grüdelbach
 		 *  @param	context The context to use
 		 *  @param	data The data to transform	
 		 */  
@@ -160,14 +169,12 @@ class SHA256
 
 		/**
 		 *  @brief 	Initialize the context
-		 *  @author	Benjamin Grüdelbach
 		 *  @param	context The context to init.
 		 */  
 		void SHA256_Init(SHA256_CTX *context);
 
 		/**
 		 *  @brief	Updates the context 
-		 *  @author	Benjamin Grüdelbach
 		 *  @param	context The context to update.
 		 *  @param	data The data for updating the context.
 		 *  @param	len The length of the given data.
@@ -179,7 +186,6 @@ class SHA256
 		/**
 		 *  @brief 	Ends the sha256 operation and return the
 		 *  		created hash in the given buffer.
-		 *  @author	Benjamin Grüdelbach
 		 *  @param	context The context to end.
 		 *  @param	buffer This OUT-Parameter contains the created
 		 *  		hash after ending the operation.
