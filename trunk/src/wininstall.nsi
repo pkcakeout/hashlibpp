@@ -50,7 +50,7 @@
   InstallDir $PROGRAMFILES\hashlib++
 
   ; Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\hashlib++" ""
+  InstallDirRegKey HKLM "Software\hashlib++" ""
 
 ;--------------------------------
 
@@ -82,9 +82,6 @@
 	  SetOutPath $INSTDIR
 	  
 	  ; Files to install:
-	  ; Put hashlib++ as a static lib in this dir
-	  ; and name it "hl++.lib"
-	  File hl++.lib
 	  File hl_hashwrapper.h
 	  File hl_md5.h
 	  File hl_md5wrapper.h
@@ -92,6 +89,12 @@
 	  File hl_sha1wrapper.h
 	  File hl_sha256.h
 	  File hl_sha256wrapper.h
+	  ; Put hashlib++ as a static lib in this dir
+	  ; and name it "hl++.lib"
+	  File hl++.lib
+	  ; make sure this file has been build using 
+          ; vim's "TOhtml" command
+	  File "..\doc\README.TXT.html"
 	  
 	  ; Store installation folder
 	  WriteRegStr HKLM "Software\hashlib++" "" $INSTDIR
@@ -120,6 +123,7 @@ Section "Uninstall"
 	  Delete "$INSTDIR\hl_sha1wrapper.h"
 	  Delete "$INSTDIR\hl_sha256.h"
 	  Delete "$INSTDIR\hl_sha256wrapper.h"
+	  Delete "$INSTDIR\README.TXT.html"
 
 	  ; Remove the directory
 	  RMDir "$INSTDIR"
