@@ -33,6 +33,9 @@
 # Type 'make' to build the lib.
 # Type 'make install' to build and install the lib.
 # Type 'make clean' to clean the object files
+# Type 'make test' _AFTER_ installing to build the libtest.cpp test
+# application. The executable will be named a.out(UNIX) or 
+# a.exe(Mingw-MYSYS/Windows)
 #
 # Benjamin Grüdelbach
 # Mi 10 Okt 2007
@@ -119,6 +122,14 @@ LIB:		MD5 SHA1 SHA256
 install:	all
 		cp libhl++.a $(LIB_PATH) && \
 		cp $(HEADER) $(INCLUDE_PATH)
+
+#----------------------------------------------------------------------- 
+#testing the lib
+#The executable will be named a.out(UNIX) or a.exe(Mingw-MYSYS/Windows)
+test:		
+		$(GCC) -Wall -Wextra \
+		       -I$(INCLUDE_PATH) -L$(LIB_PATH) \
+		       	libtest.cpp -lhl++
 
 #----------------------------------------------------------------------- 
 # Cleaning object-files
