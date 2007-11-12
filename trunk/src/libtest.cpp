@@ -182,7 +182,7 @@ void printUsage (void)
 {
 	std::cout << std::endl;
 	std::cout << "hashlib++ example program." << std::endl;
-	std::cout << "This software produces MD5 and SHA1 " << std::endl;
+	std::cout << "This software produces all supported " << std::endl;
 	std::cout << "hashes from a given string or file." << std::endl;
 	std::cout << std::endl;
 	std::cout << "usage: " << std::endl;

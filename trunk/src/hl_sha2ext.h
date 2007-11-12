@@ -139,10 +139,10 @@ typedef SHA512_CTX SHA384_CTX;
  *   		the SHA384 and SHA512 algorithm.
  *
  *   		Basically the class provides six public member-functions
- *   		to create a hash:  SHA256_Init(), SHA256_Update(), SHA256_End(),
+ *   		to create a hash:  SHA384_Init(), SHA384_Update(), SHA384_End(),
  *		SHA512_Init(), SHA512_Update() and SHA512_End().
  *   		If you want to create a hash based on a string or file quickly
- *   		you should use the sha384wrapper/sha512wrapper class instead of
+ *   		you should use the sha384wrapper or sha512wrapper classes.
  */  
 class SHA2ext
 {

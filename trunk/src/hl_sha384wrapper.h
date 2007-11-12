@@ -78,7 +78,7 @@ class sha384wrapper : public hashwrapper
 			SHA2ext *sha384;
 
 			/**
-			 * SHA512 context
+			 * SHA384 context
 			 */
 			SHA384_CTX context;
 
