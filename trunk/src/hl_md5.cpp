@@ -57,7 +57,7 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	md5.cpp
+ *  @file 	hl_md5.cpp
  *  @brief	This file contains the implementation of the MD5 class
  *  @date 	Mo 17 Sep 2007
  */  

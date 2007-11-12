@@ -29,7 +29,7 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	sha1wrapper.h
+ *  @file 	hl_sha1wrapper.h
  *  @brief	This file contains the definition of the sha1wrapper 
  *  		class.
  *  @date 	Mo 17 Sep 2007

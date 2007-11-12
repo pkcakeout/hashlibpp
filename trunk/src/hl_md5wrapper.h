@@ -29,7 +29,7 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	md5wrapper.h
+ *  @file 	hl_md5wrapper.h
  *  @brief	This file contains the definition of the md5wrapper
  *  		class.
  *  @date 	Mo 17 Sep 2007

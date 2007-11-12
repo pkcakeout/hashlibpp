@@ -27,42 +27,34 @@
  */
 
 //----------------------------------------------------------------------	
-
 /**
- *  @file 	hl_md5wrapper.cpp
- *  @brief	This file contains the implementation of the 
- *  		md5wrapper class
- *  @date 	Mo 17 Sep 2007
+ *  @file 	hl_sha384wrapper.cpp
+ *  @brief	This file contains the implementation of the sha384wrapper 
+ *  		class.
+ *  @date 	Mo 12 Nov 2007
  */  
+//----------------------------------------------------------------------	
+//hashlib++ includes
+#include "hl_sha384wrapper.h"
 
-//---------------------------------------------------------------------- 
+//----------------------------------------------------------------------	
 //STL includes
 #include <string>
-#include <fstream>
-#include <iostream>
-#include <sstream>
 
-//---------------------------------------------------------------------- 
-//hashlib++ includes
-#include "hl_md5wrapper.h"
-
-//---------------------------------------------------------------------- 
-//private member functions
+//----------------------------------------------------------------------	
+//private memberfunctions
 
 /**
  *  @brief 	This method ends the hash process
  *  		and returns the hash as string.
  *
- *  @return 	the hash as std::string
+ *  @return 	a hash as std::string
  */  
-std::string md5wrapper::hashIt(void)
+std::string sha384wrapper::hashIt(void)
 {
-	//create the hash
-	unsigned char buff[16] = "";	
-	md5->MD5Final((unsigned char*)buff,&ctx);
-
-	//converte the hash to a string and return it
-	return convToString(buff);	
+	u_int8_t buff[SHA384_DIGEST_STRING_LENGTH];
+	sha384->SHA384_End(&context,(char*)buff);
+	return convToString(buff);
 }
 
 /**
@@ -73,78 +65,52 @@ std::string md5wrapper::hashIt(void)
  *  @param 	data The hash-data to covert into HEX
  *  @return	the converted data as std::string
  */  
-std::string md5wrapper::convToString(unsigned char *bytes)
+std::string sha384wrapper::convToString(unsigned char *data)
 {
 	/*
-	 * using a ostringstream to convert the hash in a
-	 * hex string
+	 * we can just copy data to a string, because 
+	 * the transforming to hash is already done
+	 * within the sha384 implementation
 	 */
-	std::ostringstream os;
-	for(int i=0; i<16; ++i)
-	{
-		/*
-		 * set the width to 2
-		 */
-		os.width(2);
-
-		/*
-		 * fill with 0
-		 */
-		os.fill('0');
-
-		/*
-		 * conv to hex
-		 */
-		os << std::hex << static_cast<unsigned int>(bytes[i]);
-	}
-
-	/*
-	 * return as std::string
-	 */
-	return os.str();
+	return std::string((const char*)data);
 }
 
 /**
  *  @brief 	This method adds the given data to the 
- *  		current hash context.
+ *  		current hash context
  *
  *  @param 	data The data to add to the current context
  *  @param 	len The length of the data to add
  */  
-void md5wrapper::updateContext(unsigned char *data, unsigned int len)
+void sha384wrapper::updateContext(unsigned char *data, unsigned int len)
 {
-	//update 
-	md5->MD5Update(&ctx, data, len);
+	this->sha384->SHA384_Update(&context,data,len);
 }
 
 /**
  *  @brief 	This method resets the current hash context.
  *  		In other words: It starts a new hash process.
  */  
-void md5wrapper::resetContext(void)
+void sha384wrapper::resetContext(void)
 {
-	//init md5
-	md5->MD5Init(&ctx);
+	sha384->SHA384_Init(&context);
 }
 
-//---------------------------------------------------------------------- 
-//public member functions
+//----------------------------------------------------------------------	
+//public memberfunctions
 
 /**
  *  @brief 	default constructor
  */  
-md5wrapper::md5wrapper()
+sha384wrapper::sha384wrapper()
 {
-	md5 = new MD5();
+	this->sha384 = new SHA2ext();
 }
 
 /**
  *  @brief 	default destructor
  */  
-md5wrapper::~md5wrapper()
+sha384wrapper::~sha384wrapper()
 {
-	delete md5;
+	delete sha384;
 }
-
-//---------------------------------------------------------------------- 
-//EOF

@@ -29,7 +29,7 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	sha1wrapper.cpp
+ *  @file 	hl_sha1wrapper.cpp
  *  @brief	This file contains the implementation of the 
  *  		sha1wrapper class
  *  @date 	Mo 17 Sep 2007

@@ -58,7 +58,7 @@ GCC = g++
 
 #----------------------------------------------------------------------- 
 #Main-Target
-all:		MD5 SHA1 SHA256 LIB
+all:		MD5 SHA1 SHA256 SHA2EXT LIB
 
 #----------------------------------------------------------------------- 
 #all header-files
@@ -67,7 +67,9 @@ all:		MD5 SHA1 SHA256 LIB
 HEADER = 	hl_hashwrapper.h \
 		hl_md5.h hl_md5wrapper.h \
 		hl_sha1.h hl_sha1wrapper.h \
-		hl_sha256.h hl_sha256wrapper.h
+		hl_sha2mac.h \
+		hl_sha256.h hl_sha256wrapper.h \
+		hl_sha2ext.h hl_sha384wrapper.h  hl_sha512wrapper.h
 		
 #----------------------------------------------------------------------- 
 # MD5 Targets
@@ -105,37 +107,72 @@ SHA256 = 	hl_sha256.o \
 
 SHA256:		hl_sha256.o hl_sha256wrapper.o
 
-hl_sha256.o:	hl_sha256.cpp hl_sha256.h
+hl_sha256.o:	hl_sha256.cpp hl_sha256.h hl_sha2mac.h
 		$(GCC) -c hl_sha256.cpp
 
 hl_sha256wrapper.o:	hl_sha256wrapper.cpp hl_sha256wrapper.h
 			$(GCC) -c hl_sha256wrapper.cpp
 
 #----------------------------------------------------------------------- 
+# SHA2-ext Targets
+
+SHA2EXT = 	hl_sha2ext.o \
+		hl_sha384wrapper.o \
+		hl_sha512wrapper.o 
+
+		
+SHA2EXT:	hl_sha2ext.o hl_sha384wrapper.o hl_sha512wrapper.o
+
+hl_sha2ext.o:	hl_sha2ext.cpp hl_sha2ext.h hl_sha2mac.h
+		$(GCC) -c hl_sha2ext.cpp
+
+hl_sha384wrapper.o:	hl_sha384wrapper.cpp hl_sha384wrapper.h
+			$(GCC) -c hl_sha384wrapper.cpp
+
+hl_sha512wrapper.o:	hl_sha512wrapper.cpp hl_sha512wrapper.h
+			$(GCC) -c hl_sha512wrapper.cpp
+
+#----------------------------------------------------------------------- 
 # Creating a static lib using ar
 
 LIB:		MD5 SHA1 SHA256			
-		ar rs libhl++.a $(MD5) $(SHA1) $(SHA256)
+		ar rs libhl++.a $(MD5) $(SHA1) $(SHA256) $(SHA2EXT)
 
 #----------------------------------------------------------------------- 
 #Installing the lib
-install:	all
+install:	all 
 		cp libhl++.a $(LIB_PATH) && \
 		cp $(HEADER) $(INCLUDE_PATH)
+		-@ echo ""
+		-@ echo ""
+		-@ echo "------------------------------"
+		-@ echo ""
+		-@ echo "hashlib++ has been installed to:"
+		-@ echo "include files: $(INCLUDE_PATH)"
+		-@ echo "library files: $(LIB_PATH)"
+		-@ echo ""
+		-@ echo "------------------------------"
 
 #----------------------------------------------------------------------- 
 #testing the lib
 #The executable will be named a.out(UNIX) or a.exe(Mingw-MYSYS/Windows)
 test:		
+		-@ echo ""
+		-@ echo "Trying to compile the test-application (a.out/a.exe)..."
 		$(GCC) -Wall -Wextra \
 		       -I$(INCLUDE_PATH) -L$(LIB_PATH) \
 		       	libtest.cpp -lhl++
+		-@ echo ""
+		-@ echo "Test-application built succesful"
+		-@ echo ""
 
 #----------------------------------------------------------------------- 
 # Cleaning object-files
 
 clean:
 		rm *.o
+		-@ echo "cleaned up "
+		-@ echo ""
 
 #----------------------------------------------------------------------- 
 #EOF

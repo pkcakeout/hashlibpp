@@ -28,8 +28,8 @@
 //---------------------------------------------------------------------- 
 
 /*
- * The hashlib++ SHA256 implementation is derivative from the sourcecode
- * published by Aaron D. Gifford
+ * The hashlib++ SHA384 and SHA512 implementations are derivative from the
+ * sourcecode published by Aaron D. Gifford
  *
  * Copyright (c) 2000-2001, Aaron D. Gifford
  * All rights reserved.
@@ -62,22 +62,26 @@
 //---------------------------------------------------------------------- 
 
 /**
- *  @file 	hl_sha256.h
- *  @brief	This file contains the declaration of the SHA256 class
- *  @date 	Di 25 Sep 2007
+ *  @file 	hl_sha2ext.h
+ *  @brief	This file contains the declaration of the SHA384 and 
+ *  		SHA512 classes
+ *  @date 	Mo 12 Nov 2007
  */  
 
 //---------------------------------------------------------------------- 
 //include protection
-#ifndef SHA256_H
-#define SHA256_H
+#ifndef SHA2ext_H
+#define SHA2ext_H
 
-//---------------------------------------------------------------------- 
+//----------------------------------------------------------------------
 //lenght defines
-#define SHA256_BLOCK_LENGTH		64
-#define SHA256_SHORT_BLOCK_LENGTH	(SHA256_BLOCK_LENGTH - 8)
-#define SHA256_DIGEST_LENGTH		32
-#define SHA256_DIGEST_STRING_LENGTH	(SHA256_DIGEST_LENGTH * 2 + 1)
+#define SHA384_BLOCK_LENGTH             128
+#define SHA384_DIGEST_LENGTH            48
+#define SHA384_DIGEST_STRING_LENGTH     (SHA384_DIGEST_LENGTH * 2 + 1)
+#define SHA512_BLOCK_LENGTH             128
+#define SHA512_DIGEST_LENGTH            64
+#define SHA512_DIGEST_STRING_LENGTH     (SHA512_DIGEST_LENGTH * 2 + 1)
+#define SHA512_SHORT_BLOCK_LENGTH	(SHA512_BLOCK_LENGTH - 16)
 
 //---------------------------------------------------------------------- 
 //typedefs
@@ -113,92 +117,131 @@ typedef u_int32_t sha2_word32;
 typedef u_int64_t sha2_word64;	
 
 /**
- * @brief This struct represents a SHA256-hash context
+ * @brief This struct represents a SHA512-hash context
  */
-typedef struct SHA256_CTX 
+typedef struct SHA512_CTX 
 {
-	/**
-	 * state 
-	 */
-	u_int32_t	state[8];
+	u_int64_t       state[8];
+	u_int64_t       bitcount[2];
+	u_int8_t        buffer[SHA512_BLOCK_LENGTH];
+} SHA512_CTX;
 
-	/**
-	 * bitcount
-	 */
-	u_int64_t	bitcount;
 
-	/**
-	 * message buffer
-	 */
-	u_int8_t		buffer[SHA256_BLOCK_LENGTH];
-} SHA256_CTX;
+/**
+ * @brief This struct represents a SHA384-hash context
+ */
+typedef SHA512_CTX SHA384_CTX;
 
 //----------------------------------------------------------------------
 
 /**
  *  @brief 	This class represents the implementation of 
- *   		the sha256 algorithm.
+ *   		the SHA384 and SHA512 algorithm.
  *
- *   		Basically the class provides three public member-functions
- *   		to create a hash:  SHA256_Init(), SHA256_Update() and SHA256_End().
+ *   		Basically the class provides six public member-functions
+ *   		to create a hash:  SHA256_Init(), SHA256_Update(), SHA256_End(),
+ *		SHA512_Init(), SHA512_Update() and SHA512_End().
  *   		If you want to create a hash based on a string or file quickly
- *   		you should use the sha256wrapper class instead of SHA256.
+ *   		you should use the sha384wrapper/sha512wrapper class instead of
  */  
-class SHA256
+class SHA2ext
 {
 	private:
 
-
 		/**
-		 *  @brief 	Finalize the sha256 operation
+		 *  @brief 	Finalize the sha384 operation
 		 *  @param	digest The digest to finalize the operation with.
 		 *  @param	context The context to finalize.
 		 */  
-		void SHA256_Final(u_int8_t digest[SHA256_DIGEST_LENGTH],
-			          SHA256_CTX* context);
+		void SHA384_Final(u_int8_t digest[SHA384_DIGEST_LENGTH],
+			          SHA384_CTX* context);
+
+		/**
+		 *  @brief 	Finalize the sha512 operation
+		 *  @param	digest The digest to finalize the operation with.
+		 *  @param	context The context to finalize.
+		 */  
+		void SHA512_Final(u_int8_t digest[SHA512_DIGEST_LENGTH],
+			       	  SHA512_CTX* context);
+
+		/**
+		 *  @brief 	Internal method
+		 *
+		 *  		used by SHA512 and SHA384
+		 *  @author	Benjamin Grüdelbach
+		 *  @param	context The context of the operation
+		 */  
+		void SHA512_Last(SHA512_CTX* context);
 
 		/**
 		 *  @brief 	Internal data transformation
 		 *  @param	context The context to use
 		 *  @param	data The data to transform	
 		 */  
-		void SHA256_Transform(SHA256_CTX* context,
-			              const sha2_word32* data);
+		void SHA512_Transform(SHA512_CTX* context,
+			              const sha2_word64* data);
+
 
 	public:
 
 		/**
-		 *  @brief 	Initialize the context
+		 *  @brief 	Initialize the SHA384 context
 		 *  @param	context The context to init.
 		 */  
-		void SHA256_Init(SHA256_CTX *context);
+		void SHA384_Init(SHA384_CTX* context);
 
 		/**
-		 *  @brief	Updates the context 
+		 *  @brief 	Initialize the SHA512 context
+		 *  @param	context The context to init.
+		 */  
+		void SHA512_Init(SHA512_CTX* context);
+
+		/**
+		 *  @brief	Updates the SHA512 context 
 		 *  @param	context The context to update.
 		 *  @param	data The data for updating the context.
 		 *  @param	len The length of the given data.
 		 */  
-		void SHA256_Update(SHA256_CTX* context,
+		void SHA384_Update(SHA384_CTX* context,
 			           const u_int8_t* data,
 				   unsigned int len);
 
 		/**
-		 *  @brief 	Ends the sha256 operation and return the
+		 *  @brief	Updates the SHA284 context 
+		 *  @param	context The context to update.
+		 *  @param	data The data for updating the context.
+		 *  @param	len The length of the given data.
+		 */  
+		void SHA512_Update(SHA512_CTX* context,
+			           const u_int8_t* data,
+				   unsigned int len);
+
+		/**
+		 *  @brief 	Ends the SHA384 operation and return the
 		 *  		created hash in the given buffer.
 		 *  @param	context The context to end.
 		 *  @param	buffer This OUT-Parameter contains the created
 		 *  		hash after ending the operation.
 		 */  
-		char* SHA256_End(SHA256_CTX* context,
-			         char buffer[SHA256_DIGEST_STRING_LENGTH]);
+		char* SHA384_End(SHA384_CTX* context,
+			       	 char buffer[SHA384_DIGEST_STRING_LENGTH]);
+
+		/**
+		 *  @brief 	Ends the SHA512 operation and return the
+		 *  		created hash in the given buffer.
+		 *  @param	context The context to end.
+		 *  @param	buffer This OUT-Parameter contains the created
+		 *  		hash after ending the operation.
+		 */  
+		char* SHA512_End(SHA512_CTX* context,
+			       	 char buffer[SHA512_DIGEST_STRING_LENGTH]);
 
 };
+
 
 //----------------------------------------------------------------------
 //end of include protection
 #endif
-
 
 //----------------------------------------------------------------------
 //EOF

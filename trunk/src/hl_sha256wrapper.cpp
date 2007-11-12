@@ -27,6 +27,15 @@
  */
 
 //----------------------------------------------------------------------	
+
+/**
+ *  @file 	hl_sha256wrapper.cpp
+ *  @brief	This file contains the implementation of the sha256wrapper 
+ *  		class.
+ *  @date 	Di 25 Sep 2007
+ */  
+
+//----------------------------------------------------------------------	
 //hashlib++ includes
 #include "hl_sha256wrapper.h"
 #include "hl_sha256.h"

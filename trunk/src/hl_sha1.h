@@ -62,7 +62,7 @@
 //---------------------------------------------------------------------- 
 
 /**
- *  @file 	sha1.h
+ *  @file 	hl_sha1.h
  *  @brief	This file contains the declaration of the SHA1 class
  *  @date 	Mo 17 Sep 2007
  */  

@@ -51,6 +51,8 @@
 #include <hl_md5wrapper.h>
 #include <hl_sha1wrapper.h>
 #include <hl_sha256wrapper.h>
+#include <hl_sha384wrapper.h>
+#include <hl_sha512wrapper.h>
 
 //----------------------------------------------------------------------	
 //misc. includes
@@ -109,14 +111,13 @@ int main ( int argc, char **argv)
 	
 
 	/*
-	 * We create some wrappers. One for
-	 * creating a MD5-hash and the other
-	 * one for SHA1. The last wrapper is 
-	 * for SHA256.
+	 * We create some wrappers. 
 	 */
 	hashwrapper *md5 = new md5wrapper();
 	hashwrapper *sha1 = new sha1wrapper();
 	hashwrapper *sha256 = new sha256wrapper();
+	hashwrapper *sha384 = new sha384wrapper();
+	hashwrapper *sha512 = new sha512wrapper();
 
 	/*
 	 * these strings will hold our hashes
@@ -124,6 +125,8 @@ int main ( int argc, char **argv)
 	std::string sMD5 = "";
 	std::string sSHA1 = "";
 	std::string sSHA256 = "";
+	std::string sSHA384 = "";
+	std::string sSHA512 = "";
 
 	std::cout << "Your hash ";
 
@@ -137,7 +140,8 @@ int main ( int argc, char **argv)
 		sMD5 = md5->getHashFromString(strInput);
 		sSHA1 = sha1->getHashFromString(strInput);
 		sSHA256 = sha256->getHashFromString(strInput);
-		
+		sSHA384 = sha384->getHashFromString(strInput);
+		sSHA512 = sha512->getHashFromString(strInput);
 	}
 	else if( bCreateFromFile )
 	{
@@ -149,6 +153,8 @@ int main ( int argc, char **argv)
 		sMD5 = md5->getHashFromFile(strInput);
 		sSHA1 = sha1->getHashFromFile(strInput);
 		sSHA256 = sha256->getHashFromFile(strInput);
+		sSHA384 = sha384->getHashFromFile(strInput);
+		sSHA512 = sha512->getHashFromFile(strInput);
 	}
 
 	/*
@@ -158,10 +164,14 @@ int main ( int argc, char **argv)
 	std::cout << sMD5 << "(MD5)" << std::endl;
 	std::cout << sSHA1 << "(SHA1)" << std::endl;
 	std::cout << sSHA256 << "(SHA256)" << std::endl;
+	std::cout << sSHA384 << "(SHA384)" << std::endl;
+	std::cout << sSHA512 << "(SHA512)" << std::endl;
 
 	delete md5;
 	delete sha1;
 	delete sha256;
+	delete sha384;
+	delete sha512;
 
 	return 0;
 }

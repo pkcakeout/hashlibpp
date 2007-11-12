@@ -29,21 +29,21 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	hl_sha256wrapper.h
- *  @brief	This file contains the definition of the sha256wrapper 
+ *  @file 	hl_sha512wrapper.h
+ *  @brief	This file contains the definition of the sha512wrapper 
  *  		class.
- *  @date 	Di 25 Sep 2007
+ *  @date 	Mo 12 Nov 2007
  */  
 
 //----------------------------------------------------------------------	
 //include protection
-#ifndef SHA256WRAPPER_H
-#define SHA256WRAPPER_H
+#ifndef SHA512WRAPPER_H
+#define SHA512WRAPPER_H
 
 //----------------------------------------------------------------------	
 //hashlib++ includes
 #include "hl_hashwrapper.h"
-#include "hl_sha256.h"
+#include "hl_sha2ext.h"
 
 //----------------------------------------------------------------------	
 //STL
@@ -51,35 +51,35 @@
 
 //----------------------------------------------------------------------	
 
-
 /**
- *  @brief 	This class represents the SHA256 wrapper-class
+ *  @brief 	This class represents the SHA512 wrapper-class
  *
- *  		You can use this class to easily create a sha256 hash.
- *  		Just create an instance of sha256wrapper and call the
+ *  		You can use this class to easily create a sha512 hash.
+ *  		Just create an instance of sha512wrapper and call the
  *  		inherited memberfunctions getHashFromString()
  *  		and getHashFromFile() to create a hash based on a
  *  		string or a file. 
  *
  *  		Have a look at the following example:
  *
- *  @include 	sha256example.cpp
+ *  @include 	sha512example.cpp
  *
- *  		sha256wrapper implements resetContext(), updateContext()
+ *  		sha512wrapper implements resetContext(), updateContext()
  *  		and hashIt() to create a hash.
  */  
-class sha256wrapper : public hashwrapper
+class sha512wrapper : public hashwrapper
 {
 	private:
 			/**
-			 * SHA256 access
+			 * SHA512 access
+			 * via extended SHA2
 			 */
-			SHA256 *sha256;
+			SHA2ext *sha512;
 
 			/**
-			 * SHA256 context
+			 * SHA512 context
 			 */
-			SHA256_CTX context;
+			SHA512_CTX context;
 
 			/**
 			 *  @brief 	This method ends the hash process
@@ -115,16 +115,16 @@ class sha256wrapper : public hashwrapper
 			virtual void resetContext(void);
 
 	public:
-				
+
 			/**
 			 *  @brief 	default constructor
 			 */  
-			sha256wrapper();
+			sha512wrapper();
 
 			/**
 			 *  @brief 	default destructor
 			 */  
-			virtual ~sha256wrapper();
+			virtual ~sha512wrapper();
 
 };
 

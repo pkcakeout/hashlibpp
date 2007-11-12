@@ -57,7 +57,7 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	md5.h
+ *  @file 	hl_md5.h
  *  @brief	This file contains the declaration of the MD5 class
  *  @date 	Mo 17 Sep 2007
  */  

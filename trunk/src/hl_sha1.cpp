@@ -62,7 +62,7 @@
 //---------------------------------------------------------------------- 
 
 /**
- *  @file 	sha1.cpp
+ *  @file 	hl_sha1.cpp
  *  @brief	This file contains the implementation of the SHA1 class
  *  @date 	Mo 17 Sep 2007
  */  

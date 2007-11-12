@@ -62,7 +62,7 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	hashwrapper.h
+ *  @file 	hl_hashwrapper.h
  *  @brief	This file contains the hashwrapper base class
  *  @date 	Mo 17 Sep 2007
  */  
