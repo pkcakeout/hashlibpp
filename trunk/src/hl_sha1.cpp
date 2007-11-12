@@ -160,16 +160,16 @@ void SHA1::SHA1PadMessage(SHA1_CTX *context)
  */  
 void SHA1::SHA1ProcessMessageBlock(SHA1_CTX *context)
 {
-	const uint32_t K[] =    {       /* Constants defined in SHA-1   */
+	const u_int32_t K[] =    {       /* Constants defined in SHA-1   */
 		0x5A827999,
 		0x6ED9EBA1,
 		0x8F1BBCDC,
 		0xCA62C1D6
 	};
 	int           t;                 /* Loop counter                */
-	uint32_t      temp;              /* Temporary word value        */
-	uint32_t      W[80];             /* Word sequence               */
-	uint32_t      A, B, C, D, E;     /* Word buffers                */
+	u_int32_t      temp;              /* Temporary word value        */
+	u_int32_t      W[80];             /* Word sequence               */
+	u_int32_t      A, B, C, D, E;     /* Word buffers                */
 
 	/*
 	 *  Initialize the first 16 words in the array W
@@ -287,7 +287,7 @@ int SHA1::SHA1Reset(SHA1_CTX *context)
  *  @param	length The length of the data to add
  */  
 int SHA1::SHA1Input(    SHA1_CTX    *context,
-			const uint8_t  *message_array,
+			const u_int8_t  *message_array,
 			unsigned int   length)
 {
 	if (!length)
@@ -347,7 +347,7 @@ int SHA1::SHA1Input(    SHA1_CTX    *context,
  *  @return	0 on succes, an error-code otherwise
  */  
 int SHA1::SHA1Result( SHA1_CTX *context,
-		      uint8_t 	  Message_Digest[SHA1HashSize])
+		      u_int8_t 	  Message_Digest[SHA1HashSize])
 {
 	int i;
 

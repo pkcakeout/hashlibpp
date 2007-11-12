@@ -55,7 +55,7 @@
  */  
 std::string sha1wrapper::hashIt(void)
 {
-	uint8_t Message_Digest[20];
+	u_int8_t Message_Digest[20];
 	sha1->SHA1Result(&context, Message_Digest);
 
 	return convToString(Message_Digest);

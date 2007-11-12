@@ -55,7 +55,7 @@
  */  
 std::string sha256wrapper::hashIt(void)
 {
-	uint8_t buff[SHA256_DIGEST_STRING_LENGTH];
+	u_int8_t buff[SHA256_DIGEST_STRING_LENGTH];
 	sha256->SHA256_End(&context,(char*)buff);
 
 	return convToString(buff);
