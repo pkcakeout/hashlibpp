@@ -65,6 +65,7 @@ all:		MD5 SHA1 SHA256 SHA2EXT LIB
 
 		
 HEADER = 	hl_hashwrapper.h \
+		hl_exception.h \
 		hl_md5.h hl_md5wrapper.h \
 		hl_sha1.h hl_sha1wrapper.h \
 		hl_sha2mac.h \

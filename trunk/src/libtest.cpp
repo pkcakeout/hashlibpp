@@ -53,6 +53,7 @@
 #include <hl_sha256wrapper.h>
 #include <hl_sha384wrapper.h>
 #include <hl_sha512wrapper.h>
+#include <hl_exception.h>
 
 //----------------------------------------------------------------------	
 //misc. includes
@@ -128,12 +129,8 @@ int main ( int argc, char **argv)
 	std::string sSHA384 = "";
 	std::string sSHA512 = "";
 
-	std::cout << "Your hash ";
-
 	if( bCreateFromText )
 	{
-		std::cout << "for input \""; 
-
 		/*
 		 * producing hashes from the given string
 		 */
@@ -145,22 +142,33 @@ int main ( int argc, char **argv)
 	}
 	else if( bCreateFromFile )
 	{
-		std::cout << "for file \""; 
 
 		/*
 		 * producing hashes from the given file
 		 */
-		sMD5 = md5->getHashFromFile(strInput);
-		sSHA1 = sha1->getHashFromFile(strInput);
-		sSHA256 = sha256->getHashFromFile(strInput);
-		sSHA384 = sha384->getHashFromFile(strInput);
-		sSHA512 = sha512->getHashFromFile(strInput);
+		try
+		{
+			sMD5 = md5->getHashFromFile(strInput);
+			sSHA1 = sha1->getHashFromFile(strInput);
+			sSHA256 = sha256->getHashFromFile(strInput);
+			sSHA384 = sha384->getHashFromFile(strInput);
+			sSHA512 = sha512->getHashFromFile(strInput);
+		}
+		catch (hlException e)
+		{
+			std::cerr << "Error(" 
+				  << e.error_number()
+				  << "): "
+				  << e.erro_message()
+				  << std::endl;
+			exit(e.error_number());
+		}
 	}
 
 	/*
 	 * output
 	 */
-	std::cout << strInput << "\"" << std::endl;
+	std::cout << "Your hashes: " << std::endl; 
 	std::cout << sMD5 << "(MD5)" << std::endl;
 	std::cout << sSHA1 << "(SHA1)" << std::endl;
 	std::cout << sSHA256 << "(SHA256)" << std::endl;

@@ -81,6 +81,10 @@
 #include <stdio.h>
 
 //----------------------------------------------------------------------	
+//hashlib++ includes
+#include "hl_exception.h"
+
+//----------------------------------------------------------------------	
 
 /**
  *  @brief 	This class represents the baseclass for all subwrappers
@@ -219,7 +223,10 @@ class hashwrapper
 			 */
 			if ((file = fopen (filename.c_str(), "rb")) == NULL)
 			{
-				return "-1";
+				throw hlException(HL_FILE_READ_ERROR,
+						  "Cannot read file \"" + 
+						  filename + 
+						  "\".");
 			}
 
 			/*
