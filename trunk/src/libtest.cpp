@@ -142,7 +142,6 @@ int main ( int argc, char **argv)
 	}
 	else if( bCreateFromFile )
 	{
-
 		/*
 		 * producing hashes from the given file
 		 */

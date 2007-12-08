@@ -205,6 +205,8 @@ class hashwrapper
 		 *
 		 *  @return	The created hash of the file or "-1" in case
 		 *  		the file could not be opened
+		 *  @throw	Throws a hlException if the specified file could not
+		 *  		be opened.
 		 */  
 		virtual std::string getHashFromFile(std::string filename)
 		{
