@@ -1,12 +1,12 @@
 
 hashlib++ - a simple hash library for C++
-Copyright (c) 2007 Benjamin Grüdelbach
+Copyright (c) 2007,2008 Benjamin Grüdelbach
 
 About this document:
 This document explains the basics of the hashlib++ library.  You should read this
 stuff if you are new to hashlib++.
 
-TUE 16 Oct 2007
+MI  9 Jan 2008 
 
 -------------------------------------------------------------------------------	
 
@@ -37,17 +37,13 @@ section 8) and therefore free software.
 
 1) Current version / What's new?
 
-The current stable version of hashlib++ is:  0.2
+The current stable version of hashlib++ is:  0.3
 
-Improvements for hashlib++ version 0.2:
+Improvements for hashlib++ version 0.3:
 
-	* ! SHA256 support has been added to hashlib++ !
-	* Added a Linux/FreeBSD makefile and a "Setup.exe" for Windows to 
-	  build/install hashlib++ as a static library.
-	* All files have been renamed using the prefix "hl_" to prevent
-	  name collisions. 
-	* Replaced sprintf by using an ostringstream to format the hash
-	  to a hex string.
+	* SHA384 and SHA512 support has been added to hashlib++ 
+	* Throwing exceptions allow better error-handling
+	* Bugfixes
 
 -------------------------------------------------------------------------------	
 
@@ -57,7 +53,7 @@ By now hashlib++ supports the following functions:
 
 	* MD5		Message-Digest algorithm 5
 	* SHA1  	Secure Hash Algorithm 1
-	* SHA256 	Secure Hash Algorithm 256
+	* SHA2-Family 	Secure Hash Algorithm 256, 384 and 512
 
 -------------------------------------------------------------------------------	
 3) Installing hashlib++
@@ -107,6 +103,9 @@ The wrappers:
 	* md5wrapper	for MD5		in hl_md5wrapper.h
 	* sha1wrapper	for SHA1	in hl_sha1wrapper.h
 	* sha256wrapper	for SHA256	in hl_sha256wrapper.h
+	* sha384wrapper	for SHA384	in hl_sha384wrapper.h
+	* sha512wrapper	for SHA512	in hl_sha512wrapper.h
+
 
 -------------------------------------------------------------------------------	
 
@@ -117,26 +116,40 @@ The library consist of the the following files:
 	* hl_hashwrapper.h
 	  This is a baseclass of all wrappers.
 
+	* hl_exception.h
+	  Class for error-handling.
+
 	* hl_md5.h and hl_md5.cpp
 	  These two files implement the MD5 algorithm. 
 	
 	* hl_md5wrapper.h and hl_md5wrapper.cpp
 	  These files represents the MD5 wrapper. 
-	  Use this wrapper to easily create a MD5 hash.
 	
         * hl_sha1.h and hl_sha1.cpp
 	  These two files implement the SHA1 algorithm. 
 	
 	* hl_sha1wrapper.h and hl_sha1wrapper.cpp
 	  These files represents the SHA1 wrapper. 
-	  Use this wrapper to easily create a SHA1 hash.
 
         * hl_sha256.h and hl_sha256.cpp
 	  These two files implement the SHA256 algorithm. 
 	
 	* hl_sha256wrapper.h and hl_sha256wrapper.cpp
 	  These files represents the SHA256 wrapper. 
-	  Use this wrapper to easily create a SHA256 hash.
+
+	* hl_sha2ext.h and hl_sha2ext.cpp
+	  This is the implementation of SHA384 and SHA512
+	  Alogrithm.
+
+	* hl_2mac.h
+	  Contains some macros used in the SHA384 and SHA512
+	  implementation.
+
+	* hl_sha384wrapper.h and hl_sha384wrapper.cpp
+	  The wrapper class for SHA384.
+
+	* hl_sha512wrapper.h and hl_sha512wrapper.cpp
+	  The wrapper class for SHA512.
 	
 	* libtest.cpp
 	  This is a example program which shows how to 
@@ -165,15 +178,28 @@ Once a wrapper has been instantiated, you can basically call the memberfunctions
 getHashFromFile() and getHashFromString() to create a hash from a file or
 string.
 
-	std::string mytexthash = md5->getHashFromString("Hello World");
-	std::string myfilehash = md5->getHashFromFile("README.TXT");
+	try
+	{
+		std::string mytexthash = md5->getHashFromString("Hello World");
+		std::string myfilehash = md5->getHashFromFile("README.TXT");
+	}
+	catch(hlException &e)
+	{
+		// your error handling here.
+		// use: e.error_number() and
+		//      e.error_message()	
+	}
+		
 
 And that's all! 
 
 	delete md5;
 	delete sha1;
 
-If you are on Linux/FreeBSD you probably want to build your application using g++:
+Now you can compile ypur project. Don't forget to link against hashlib++,
+if you use it as a sttaic library.
+If you are on Linux/FreeBSD/etc. you probably want to build your application
+using g++. For example:
 
 	g++ -I/usr/local/include -L/usr/local/lib libtest.cpp -lhl++
 
@@ -190,7 +216,7 @@ hashlib++ was written in standard C++, so it is platform independent and
 should work with every C++ compiler. It was tested on the following systems
 which are official supported:
 
-	FreeBSD 6.2 with g++ 3.4.6
+	FreeBSD 6.2 with g++ 3.4.6 and 4.1.3
 	Microsoft Windows XP with Microsoft Visual C++ 2005 Express Edition
 	Gnu/Linux 2.6 with g++ 3.4.6
 
@@ -200,7 +226,7 @@ which are official supported:
 
 hashlib++ - a simple hash library for C++
 
-Copyright (c) 2007 Benjamin Grüdelbach
+Copyright (c) 2007,2008 Benjamin Grüdelbach
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -297,8 +323,8 @@ http://hashlib2plus.sourceforge.net/
 
 	* SHA256 implementation
 
-	  The hashlib++ SHA256 implementation is derivative from the
-	  sourcecode published by Aaron D. Gifford
+	  The hashlib++ SHA256,SHA384 and SHA512 implementation is derivative 
+	  from the sourcecode published by Aaron D. Gifford
 	  
 	  Copyright (c) 2000-2001, Aaron D. Gifford All rights reserved.
 	  
