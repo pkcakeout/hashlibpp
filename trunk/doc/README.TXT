@@ -43,7 +43,7 @@ Improvements for hashlib++ version 0.3:
 
 	* SHA384 and SHA512 support has been added to hashlib++ 
 	* Throwing exceptions allow better error-handling
-	* Bugfixes
+	* Bug fixes
 
 -------------------------------------------------------------------------------	
 
@@ -139,7 +139,7 @@ The library consist of the the following files:
 
 	* hl_sha2ext.h and hl_sha2ext.cpp
 	  This is the implementation of SHA384 and SHA512
-	  Alogrithm.
+	  algorithm.
 
 	* hl_2mac.h
 	  Contains some macros used in the SHA384 and SHA512
@@ -196,8 +196,8 @@ And that's all!
 	delete md5;
 	delete sha1;
 
-Now you can compile ypur project. Don't forget to link against hashlib++,
-if you use it as a sttaic library.
+Now you can compile your project. Don't forget to link against hashlib++,
+if you use it as a static library.
 If you are on Linux/FreeBSD/etc. you probably want to build your application
 using g++. For example:
 
