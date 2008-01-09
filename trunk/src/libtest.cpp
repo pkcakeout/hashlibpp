@@ -53,7 +53,6 @@
 #include <hl_sha256wrapper.h>
 #include <hl_sha384wrapper.h>
 #include <hl_sha512wrapper.h>
-#include <hl_exception.h>
 
 //----------------------------------------------------------------------	
 //misc. includes
