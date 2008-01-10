@@ -83,12 +83,18 @@
 	  
 	  ; Files to install:
 	  File hl_hashwrapper.h
+	  File hl_exception.h
 	  File hl_md5.h
 	  File hl_md5wrapper.h
 	  File hl_sha1.h
 	  File hl_sha1wrapper.h
 	  File hl_sha256.h
 	  File hl_sha256wrapper.h
+	  File hl_sha2mac.h
+	  File hl_sha2ext.h
+	  File hl_sha384wrapper.h
+	  File hl_sha512wrapper.h
+
 	  ; Put hashlib++ as a static lib in this dir
 	  ; and name it "hl++.lib"
 	  File hl++.lib
@@ -117,6 +123,7 @@ Section "Uninstall"
 	  Delete "$INSTDIR\Uninstall.exe"
 	  Delete "$INSTDIR\hl++.lib"
 	  Delete "$INSTDIR\hl_hashwrapper.h"
+	  Delete "$INSTDIR\hl_exception.h"
 	  Delete "$INSTDIR\hl_md5.h"
 	  Delete "$INSTDIR\hl_md5wrapper.h"
 	  Delete "$INSTDIR\hl_sha1.h"
@@ -124,6 +131,10 @@ Section "Uninstall"
 	  Delete "$INSTDIR\hl_sha256.h"
 	  Delete "$INSTDIR\hl_sha256wrapper.h"
 	  Delete "$INSTDIR\README.TXT.html"
+	  Delete "$INSTDIR\hl_sha2mac.h"
+	  Delete "$INSTDIR\hl_sha2ext.h"
+	  Delete "$INSTDIR\hl_sha384wrapper.h"
+	  Delete "$INSTDIR\hl_sha512wrapper.h"
 
 	  ; Remove the directory
 	  RMDir "$INSTDIR"
