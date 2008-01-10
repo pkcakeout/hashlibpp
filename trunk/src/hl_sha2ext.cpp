@@ -348,7 +348,7 @@ void SHA2ext::SHA512_Transform(SHA512_CTX* context, const sha2_word64* data) {
 }
 #endif /* SHA2_UNROLL_TRANSFORM */
 
-void SHA2ext::SHA512_Update(SHA512_CTX* context, const sha2_byte *data, size_t len) {
+void SHA2ext::SHA512_Update(SHA512_CTX* context, const sha2_byte *data, unsigned int len) {
 	unsigned int	freespace, usedspace;
 
 	if (len == 0) {
@@ -502,7 +502,7 @@ void SHA2ext::SHA384_Init(SHA384_CTX* context)
 	context->bitcount[0] = context->bitcount[1] = 0;
 }
 
-void SHA2ext::SHA384_Update(SHA384_CTX* context, const sha2_byte* data, size_t len) 
+void SHA2ext::SHA384_Update(SHA384_CTX* context, const sha2_byte* data, unsigned int len) 
 {
 	SHA512_Update((SHA512_CTX*)context, data, len);
 }

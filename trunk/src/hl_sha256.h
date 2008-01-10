@@ -86,32 +86,32 @@
 /**
  * 1-byte  (8-bits)  
  */
-typedef unsigned char u_int8_t;		
+typedef unsigned char u_int8;		
 
 /**
  * 4-bytes (32-bits) 
  */
-typedef unsigned int u_int32_t;
+typedef unsigned int u_int32;
 
 /** 
  * 8-bytes (64-bits) 
  */
-typedef unsigned long long u_int64_t;	
+typedef unsigned long long u_int64;	
 
 /**
  * Exactly 1 byte 
  */ 
-typedef u_int8_t  sha2_byte;	
+typedef u_int8  sha2_byte;	
 
 /**
  * Exactly 4 bytes 
  */
-typedef u_int32_t sha2_word32;	
+typedef u_int32 sha2_word32;	
 
 /**
  * Exactly 8 bytes 
  */ 
-typedef u_int64_t sha2_word64;	
+typedef u_int64 sha2_word64;	
 
 /**
  * @brief This struct represents a SHA256-hash context
@@ -121,17 +121,17 @@ typedef struct SHA256_CTX
 	/**
 	 * state 
 	 */
-	u_int32_t	state[8];
+	u_int32		state[8];
 
 	/**
 	 * bitcount
 	 */
-	u_int64_t	bitcount;
+	u_int64		bitcount;
 
 	/**
 	 * message buffer
 	 */
-	u_int8_t		buffer[SHA256_BLOCK_LENGTH];
+	u_int8		buffer[SHA256_BLOCK_LENGTH];
 } SHA256_CTX;
 
 //----------------------------------------------------------------------
@@ -155,7 +155,7 @@ class SHA256
 		 *  @param	digest The digest to finalize the operation with.
 		 *  @param	context The context to finalize.
 		 */  
-		void SHA256_Final(u_int8_t digest[SHA256_DIGEST_LENGTH],
+		void SHA256_Final(u_int8 digest[SHA256_DIGEST_LENGTH],
 			          SHA256_CTX* context);
 
 		/**
@@ -181,7 +181,7 @@ class SHA256
 		 *  @param	len The length of the given data.
 		 */  
 		void SHA256_Update(SHA256_CTX* context,
-			           const u_int8_t* data,
+			           const u_int8* data,
 				   unsigned int len);
 
 		/**
