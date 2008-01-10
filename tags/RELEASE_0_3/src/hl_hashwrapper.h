@@ -32,7 +32,7 @@
 /**
  * @mainpage  hashlib++ source documentation
  *
- * 	      <div align="center"><b>Version 0.2</b></div>
+ * 	      <div align="center"><b>Version 0.3</b></div>
  * 	      
  *
  * 	      @section intro Introduction
