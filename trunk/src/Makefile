@@ -37,6 +37,9 @@
 # application. The executable will be named a.out(UNIX) or 
 # a.exe(Mingw-MYSYS/Windows)
 #
+# Note for FreeBSD users:
+# use gmake from "/usr/ports/devel/gmake"
+#
 # Benjamin Grüdelbach
 # Mi 10 Okt 2007
 #
@@ -53,11 +56,15 @@ LIB_PATH = /usr/local/lib/
 COMPILER = g++
 
 # Global options for the compiler
-COPTIONS = -ansi
+COPTIONS = -ansi -O3
 
 #----------------------------------------------------------------------- 
 # DON'T CHANGE ANYTHING BELOW
 #----------------------------------------------------------------------- 
+
+ifdef DEBUG
+	COPTIONS += -g
+endif
 
 GCC = $(COMPILER) $(COPTIONS)
 
@@ -75,7 +82,9 @@ HEADER = 	hl_hashwrapper.h \
 		hl_sha1.h hl_sha1wrapper.h \
 		hl_sha2mac.h \
 		hl_sha256.h hl_sha256wrapper.h \
-		hl_sha2ext.h hl_sha384wrapper.h  hl_sha512wrapper.h
+		hl_sha2ext.h hl_sha384wrapper.h  hl_sha512wrapper.h \
+		hl_types.h \
+		hashlibpp.h
 		
 #----------------------------------------------------------------------- 
 # MD5 Targets
