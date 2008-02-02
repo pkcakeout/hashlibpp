@@ -52,7 +52,7 @@
  */  
 std::string sha384wrapper::hashIt(void)
 {
-	u_int8_t buff[SHA384_DIGEST_STRING_LENGTH];
+	sha2_byte buff[SHA384_DIGEST_STRING_LENGTH];
 	sha384->SHA384_End(&context,(char*)buff);
 	return convToString(buff);
 }

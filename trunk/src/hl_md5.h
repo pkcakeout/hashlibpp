@@ -72,8 +72,12 @@
 #include <string>
 
 //---------------------------------------------------------------------- 
+//hl includes
+#include "hl_types.h"
+
+//---------------------------------------------------------------------- 
 //typedefs
-typedef unsigned char *POINTER;
+typedef hl_uint8 *POINTER;
 
 /**
  * @brief this struct represents a MD5-hash context.

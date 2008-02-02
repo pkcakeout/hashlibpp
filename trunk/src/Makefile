@@ -49,12 +49,17 @@ INCLUDE_PATH = /usr/local/include/
 # Path to install the library
 LIB_PATH = /usr/local/lib/
 
-# compiler
-GCC = g++
+# Compiler to use
+COMPILER = g++
+
+# Global options for the compiler
+COPTIONS = -ansi
 
 #----------------------------------------------------------------------- 
 # DON'T CHANGE ANYTHING BELOW
 #----------------------------------------------------------------------- 
+
+GCC = $(COMPILER) $(COPTIONS)
 
 #----------------------------------------------------------------------- 
 #Main-Target

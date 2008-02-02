@@ -29,96 +29,41 @@
 //----------------------------------------------------------------------	
 
 /**
- *  @file 	hl_sha256wrapper.cpp
- *  @brief	This file contains the implementation of the sha256wrapper 
- *  		class.
- *  @date 	Di 25 Sep 2007
+ *  @file 	hl_types.h
+ *  @brief	This file defines some global types
+ *  @date 	So 13 Jan 2008
  */  
 
 //----------------------------------------------------------------------	
-//hashlib++ includes
-#include "hl_sha256wrapper.h"
-#include "hl_sha256.h"
-
-
-//----------------------------------------------------------------------	
-//STL includes
-#include <string>
+//include protection
+#ifndef HLTYPES_H
+#define HLTYPES_H
 
 //----------------------------------------------------------------------	
-//private memberfunctions
 
 /**
- *  @brief 	This method ends the hash process
- *  		and returns the hash as string.
- *
- *  @return 	a hash as std::string
- */  
-std::string sha256wrapper::hashIt(void)
-{
-	sha2_byte buff[SHA256_DIGEST_STRING_LENGTH];
-	sha256->SHA256_End(&context,(char*)buff);
-
-	return convToString(buff);
-}
+ * exactly 1 Byte
+ */
+typedef unsigned char 		hl_uint8;
 
 /**
- *  @brief 	This internal member-function
- *  		convertes the hash-data to a
- *  		std::string (HEX).
- *
- *  @param 	data The hash-data to covert into HEX
- *  @return	the converted data as std::string
- */  
-std::string sha256wrapper::convToString(unsigned char *data)
-{
-	/*
-	 * we can just copy data to a string, because 
-	 * the transforming to hash is already done
-	 * within the sha256 implementation
-	 */
-	return std::string((const char*)data);
-}
+ * at least 2 Byte
+ */
+typedef unsigned short int 	hl_uint16;
 
 /**
- *  @brief 	This method adds the given data to the 
- *  		current hash context
- *
- *  @param 	data The data to add to the current context
- *  @param 	len The length of the data to add
- */  
-void sha256wrapper::updateContext(unsigned char *data, unsigned int len)
-{
-	this->sha256->SHA256_Update(&context,data,len);
-}
+ * at least 4 Byte
+ */
+typedef unsigned long int 	hl_uint32;
 
 /**
- *  @brief 	This method resets the current hash context.
- *  		In other words: It starts a new hash process.
- */  
-void sha256wrapper::resetContext(void)
-{
-	sha256->SHA256_Init(&context);
-}
+ * at least 8 Byte
+ */
+typedef unsigned long long int	hl_uint64;
 
 //----------------------------------------------------------------------	
-//public memberfunctions
-
-/**
- *  @brief 	default constructor
- */  
-sha256wrapper::sha256wrapper()
-{
-	this->sha256 = new SHA256();	
-}
-
-/**
- *  @brief 	default destructor
- */  
-sha256wrapper::~sha256wrapper()
-{
-	delete sha256;
-}
+//end of include protection
+#endif
 
 //----------------------------------------------------------------------	
 //EOF

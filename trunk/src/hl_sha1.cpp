@@ -71,6 +71,7 @@
 //hashlib++ includes
 #include "hl_sha1.h"
 
+
 //---------------------------------------------------------------------- 
 //defines
 
@@ -160,16 +161,16 @@ void SHA1::SHA1PadMessage(SHA1_CTX *context)
  */  
 void SHA1::SHA1ProcessMessageBlock(SHA1_CTX *context)
 {
-	const u_int32_t K[] =    {       /* Constants defined in SHA-1   */
+	const hl_uint32 K[] =    {       /* Constants defined in SHA-1   */
 		0x5A827999,
 		0x6ED9EBA1,
 		0x8F1BBCDC,
 		0xCA62C1D6
 	};
 	int           t;                 /* Loop counter                */
-	u_int32_t      temp;              /* Temporary word value        */
-	u_int32_t      W[80];             /* Word sequence               */
-	u_int32_t      A, B, C, D, E;     /* Word buffers                */
+	hl_uint32      temp;              /* Temporary word value        */
+	hl_uint32      W[80];             /* Word sequence               */
+	hl_uint32      A, B, C, D, E;     /* Word buffers                */
 
 	/*
 	 *  Initialize the first 16 words in the array W
@@ -287,7 +288,7 @@ int SHA1::SHA1Reset(SHA1_CTX *context)
  *  @param	length The length of the data to add
  */  
 int SHA1::SHA1Input(    SHA1_CTX    *context,
-			const u_int8_t  *message_array,
+			const hl_uint8  *message_array,
 			unsigned int   length)
 {
 	if (!length)
@@ -347,7 +348,7 @@ int SHA1::SHA1Input(    SHA1_CTX    *context,
  *  @return	0 on succes, an error-code otherwise
  */  
 int SHA1::SHA1Result( SHA1_CTX *context,
-		      u_int8_t 	  Message_Digest[SHA1HashSize])
+		      hl_uint8 	  Message_Digest[SHA1HashSize])
 {
 	int i;
 

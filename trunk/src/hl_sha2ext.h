@@ -84,46 +84,35 @@
 #define SHA512_SHORT_BLOCK_LENGTH	(SHA512_BLOCK_LENGTH - 16)
 
 //---------------------------------------------------------------------- 
+//hl includes
+#include "hl_types.h"
+
+//---------------------------------------------------------------------- 
 //typedefs
-
-/**
- * 1-byte  (8-bits)  
- */
-typedef unsigned char u_int8;		
-
-/**
- * 4-bytes (32-bits) 
- */
-typedef unsigned int u_int32;
-
-/** 
- * 8-bytes (64-bits) 
- */
-typedef unsigned long long u_int64;	
 
 /**
  * Exactly 1 byte 
  */ 
-typedef u_int8  sha2_byte;	
+typedef hl_uint8  sha2_byte;	
 
 /**
  * Exactly 4 bytes 
  */
-typedef u_int32 sha2_word32;	
+typedef hl_uint32 sha2_word32;	
 
 /**
  * Exactly 8 bytes 
  */ 
-typedef u_int64 sha2_word64;	
+typedef hl_uint64 sha2_word64;	
 
 /**
  * @brief This struct represents a SHA512-hash context
  */
 typedef struct SHA512_CTX 
 {
-	u_int64       state[8];
-	u_int64       bitcount[2];
-	u_int8        buffer[SHA512_BLOCK_LENGTH];
+	hl_uint64       state[8];
+	hl_uint64       bitcount[2];
+	hl_uint8        buffer[SHA512_BLOCK_LENGTH];
 } SHA512_CTX;
 
 
@@ -153,7 +142,7 @@ class SHA2ext
 		 *  @param	digest The digest to finalize the operation with.
 		 *  @param	context The context to finalize.
 		 */  
-		void SHA384_Final(u_int8 digest[SHA384_DIGEST_LENGTH],
+		void SHA384_Final(hl_uint8 digest[SHA384_DIGEST_LENGTH],
 			          SHA384_CTX* context);
 
 		/**
@@ -161,7 +150,7 @@ class SHA2ext
 		 *  @param	digest The digest to finalize the operation with.
 		 *  @param	context The context to finalize.
 		 */  
-		void SHA512_Final(u_int8 digest[SHA512_DIGEST_LENGTH],
+		void SHA512_Final(hl_uint8 digest[SHA512_DIGEST_LENGTH],
 			       	  SHA512_CTX* context);
 
 		/**
@@ -203,7 +192,7 @@ class SHA2ext
 		 *  @param	len The length of the given data.
 		 */  
 		void SHA384_Update(SHA384_CTX* context,
-			           const u_int8* data,
+			           const hl_uint8* data,
 				   unsigned int len);
 
 		/**
@@ -213,7 +202,7 @@ class SHA2ext
 		 *  @param	len The length of the given data.
 		 */  
 		void SHA512_Update(SHA512_CTX* context,
-			           const u_int8* data,
+			           const hl_uint8* data,
 				   unsigned int len);
 
 		/**

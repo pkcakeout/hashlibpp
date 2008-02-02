@@ -73,22 +73,8 @@
 #define SHA1_H
 
 //---------------------------------------------------------------------- 
-//typedefs
-
-/**
- * unsigned 32 bit integer
- */
-typedef unsigned int u_int32_t;
-
-/**
- * unsigned 8 bit integer (i.e., unsigned char)
- */
-typedef unsigned char u_int8_t;
-
-/**
- * integer of >= 16 bits
- */
-typedef short int_least16_t;
+//hl includes
+#include "hl_types.h"
 
 //---------------------------------------------------------------------- 
 //enums
@@ -117,19 +103,19 @@ enum
 typedef struct SHA1_CTX
 {
 	/** Message Digest */
-	u_int32_t Intermediate_Hash[SHA1HashSize/4];
+	hl_uint32 Intermediate_Hash[SHA1HashSize/4];
 
 	/** Message length in bits */
-	u_int32_t Length_Low;            
+	hl_uint32 Length_Low;            
 
 	/** Message length in bits */
-	u_int32_t Length_High;
+	hl_uint32 Length_High;
 
 	/** Index into message block array */
-	int_least16_t Message_Block_Index;
+	hl_uint16 Message_Block_Index;
 
 	/** 512-bit message blocks */
-	u_int8_t Message_Block[64];      
+	hl_uint8 Message_Block[64];      
 
 	/** Is the digest computed? */
 	int Computed;
@@ -208,7 +194,7 @@ class SHA1
 		 *  @param	length The length of the data to add
 		 */  
 		int SHA1Input(  SHA1_CTX   *context,
-				const u_int8_t *message_array,
+				const hl_uint8 *message_array,
 				unsigned int  length);
 
 		/**
@@ -221,7 +207,7 @@ class SHA1
 		 *  @return	0 on succes, an error-code otherwise
 		 */  
 		int SHA1Result( SHA1_CTX *context,
-				u_int8_t     Message_Digest[SHA1HashSize]);
+				hl_uint8     Message_Digest[SHA1HashSize]);
 };
 
 //----------------------------------------------------------------------

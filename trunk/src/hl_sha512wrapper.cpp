@@ -54,7 +54,7 @@
  */  
 std::string sha512wrapper::hashIt(void)
 {
-	u_int8_t buff[SHA512_DIGEST_STRING_LENGTH];
+	sha2_byte buff[SHA512_DIGEST_STRING_LENGTH];
 	sha512->SHA512_End(&context,(char*)buff);
 	return convToString(buff);
 }
