@@ -56,7 +56,7 @@ LIB_PATH = /usr/local/lib/
 COMPILER = g++
 
 # Global options for the compiler
-COPTIONS = -ansi -O3
+COPTIONS = -ansi -Wall -Wextra
 
 #----------------------------------------------------------------------- 
 # DON'T CHANGE ANYTHING BELOW
@@ -64,6 +64,8 @@ COPTIONS = -ansi -O3
 
 ifdef DEBUG
 	COPTIONS += -g
+else
+	COPTIONS += -O3
 endif
 
 GCC = $(COMPILER) $(COPTIONS)
