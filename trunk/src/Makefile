@@ -65,7 +65,7 @@ COPTIONS = -ansi -Wall -Wextra
 ifdef DEBUG
 	COPTIONS += -g
 else
-	COPTIONS += -O3
+	COPTIONS += -O3 -fomit-frame-pointer
 endif
 
 GCC = $(COMPILER) $(COPTIONS)
