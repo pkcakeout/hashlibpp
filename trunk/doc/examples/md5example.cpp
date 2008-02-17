@@ -1,5 +1,4 @@
-#include <hl_hashwrapper.h>
-#include <hl_md5wrapper.h>
+#include <hashlibpp.h>
 #include <string>
 #include <iostream>  //for "cerr"
 

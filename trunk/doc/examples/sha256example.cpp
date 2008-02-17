@@ -1,5 +1,4 @@
-#include <hl_hashwrapper.h>
-#include <hl_sha256wrapper.h>
+#include <hashlibpp.h>
 #include <string>
 
 /*

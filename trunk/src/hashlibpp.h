@@ -29,7 +29,7 @@
 //----------------------------------------------------------------------
 
 /**
- *  @file 	hl_types.h
+ *  @file 	hashlibpp.h
  *  @brief	This file is just an include wrapper
  *  @date 	Sa  2 Feb
  */  

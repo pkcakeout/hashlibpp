@@ -6,7 +6,7 @@ About this document:
 This document explains the basics of the hashlib++ library.  You should read this
 stuff if you are new to hashlib++.
 
-MI  9 Jan 2008 
+MI  17 Feb 2008 
 
 -------------------------------------------------------------------------------	
 
@@ -37,13 +37,16 @@ section 8) and therefore free software.
 
 1) Current version / What's new?
 
-The current stable version of hashlib++ is:  0.3
+The current stable version of hashlib++ is:  0.3.1
 
-Improvements for hashlib++ version 0.3:
+Improvements for hashlib++ version 0.3.1:
 
-	* SHA384 and SHA512 support has been added to hashlib++ 
-	* Throwing exceptions allow better error-handling
-	* Bug fixes
+	Version 0.3.1 is basicly a bugfix release.
+
+	* Added hl_types.h which defines basic typdefs to avoid
+	  compile-errors on some systems.
+	* Added DEBUG flag to the Unix-Makefile
+	* Added hashlibpp.h which is just an include-wrapper. 
 
 -------------------------------------------------------------------------------	
 
@@ -80,7 +83,7 @@ Linux/FreeBSD:
 
 	Now type 'make' to build hashlib++ as a static library and
 	'make install' to install hashlib++ into LIB_PATH and INCLUDE_PATH. 
-	Type 'make clean' to clean up the *.o files.
+	Type 'make clean' to clean up the *.o files. 
 	
 Alternative use for Windows, Linux and FreeBSD:
 
@@ -112,6 +115,10 @@ The wrappers:
 5) The library's files
 
 The library consist of the the following files:
+
+	* hashlibpp.h
+	  Basic include-file. Include this file to 
+	  access hashlib++. 
 
 	* hl_hashwrapper.h
 	  This is a baseclass of all wrappers.
@@ -162,12 +169,9 @@ The library consist of the the following files:
 6) Using hashlib++
 
 This section explains how to create a hash with the help of hashlib++.  First of
-all you have to include the baseclass "hashwrapper" (hl_hashwrapper.h) and the 
-headerfile of the wrapper you want to use:
+all you have to include hashlibpp.h:
 
-	#include <hl_hashwrapper.h>
-	#include <hl_sha1wrapper.h>
-	#include <hl_md5wrapper.h>
+	#include <hashlibpp.h>
 
 After that you can create wrapper objects:
 
