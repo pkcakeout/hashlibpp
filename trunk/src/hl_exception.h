@@ -92,7 +92,7 @@ class hlException
 			 *  @brief 	returns the error message
 			 *  @return	the error message
 			 */  
-			std::string erro_message(void)
+			std::string error_message(void)
 			{
 				return strMessge;
 			}
