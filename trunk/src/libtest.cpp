@@ -152,7 +152,7 @@ int main ( int argc, char **argv)
 			std::cerr << "Error(" 
 				  << e.error_number()
 				  << "): "
-				  << e.erro_message()
+				  << e.error_message()
 				  << std::endl;
 			exit(e.error_number());
 		}
