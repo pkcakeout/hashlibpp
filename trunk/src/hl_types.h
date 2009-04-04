@@ -59,7 +59,12 @@ typedef unsigned long int 	hl_uint32;
 /**
  * at least 8 Byte
  */
-typedef unsigned long long int	hl_uint64;
+#ifdef WIN32
+	typedef __int64 hl_uint64;
+#else
+	typedef unsigned long long int	hl_uint64;
+#endif
+
 
 //----------------------------------------------------------------------	
 //end of include protection
