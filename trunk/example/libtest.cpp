@@ -52,7 +52,7 @@
 //----------------------------------------------------------------------	
 //misc. includes
 #include <iostream>
-#include <string>
+#include <string.h>
 
 //----------------------------------------------------------------------	
 //prototypes
@@ -99,7 +99,7 @@ int main ( int argc, char **argv)
 	    (bCreateFromFile == false) )
 	{
 		printUsage();
-		exit(0);
+		return 0;
 	}
 	
         //--------------------------------------------------------------
@@ -154,7 +154,7 @@ int main ( int argc, char **argv)
 				  << "): "
 				  << e.error_message()
 				  << std::endl;
-			exit(e.error_number());
+			return e.error_number();
 		}
 	}
 
