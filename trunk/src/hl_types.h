@@ -59,7 +59,7 @@ typedef unsigned long int hl_uint32;
 /**
  * at least 8 Byte
  */
-#ifdef GCC
+#ifdef __GNUC__
 	typedef unsigned long long int	hl_uint64;
 #elif __MINGW32__
 	typedef unsigned long long int	hl_uint64;
