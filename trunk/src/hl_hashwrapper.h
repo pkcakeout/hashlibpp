@@ -78,7 +78,9 @@
 
 //----------------------------------------------------------------------	
 //C includes
-#include <stdio.h>
+//#include <stdio.h>
+#include <fstream>
+#include <iostream>
 
 //----------------------------------------------------------------------	
 //hashlib++ includes
@@ -210,8 +212,7 @@ class hashwrapper
 		 */  
 		virtual std::string getHashFromFile(std::string filename)
 		{
-
-			FILE *file;
+			std::ifstream ifs;
 			int len;
 			unsigned char buffer[1024];
 
@@ -223,7 +224,8 @@ class hashwrapper
 			/*
 			 * open the specified file
 			 */
-			if ((file = fopen (filename.c_str(), "rb")) == NULL)
+			ifs.open(filename.c_str());
+			if( ! ifs.is_open() )
 			{
 				throw hlException(HL_FILE_READ_ERROR,
 						  "Cannot read file \"" + 
@@ -235,19 +237,15 @@ class hashwrapper
 			 * read the file in 1024b blocks and
 			 * update the context for every block
 			 */
-			while ( (len = fread (buffer, 1, 1024, file)) )
+			while( (len = ifs.readsome((char*)buffer,1024)))
 			{
 				updateContext(buffer, len);
 			}
 
-			/*
-			 * close the file and 
-			 * return the hash
-			 */
-			fclose(file);
-			return (hashIt());
+			ifs.close();
+			return(hashIt());
 		}
-};
+}; 
 
 //----------------------------------------------------------------------	
 //end of include protection
