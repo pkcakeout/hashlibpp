@@ -54,7 +54,7 @@ typedef unsigned short int 	hl_uint16;
 /**
  * at least 4 Byte
  */
-typedef unsigned long int hl_uint32;
+typedef unsigned int hl_uint32;
 
 /**
  * at least 8 Byte
