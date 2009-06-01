@@ -52,7 +52,8 @@
 typedef enum hlerrors
 {
 	HL_NO_ERROR = 0,
-	HL_FILE_READ_ERROR	
+	HL_FILE_READ_ERROR,
+	HL_VERIFY_TEST_FAILED
 } hlerror;
 
 //----------------------------------------------------------------------

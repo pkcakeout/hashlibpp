@@ -115,6 +115,23 @@ int main ( int argc, char **argv)
 	hashwrapper *sha512 = new sha512wrapper();
 
 	/*
+	 * Test the implementations
+	 */
+	try
+	{
+		md5->test();
+		sha1->test();
+		sha256->test();
+		sha384->test();
+		sha512->test();
+	}
+	catch(hlException &e)
+	{
+		std::cerr << e.error_message() << std::endl;
+		return(-1);
+	}
+
+	/*
 	 * these strings will hold our hashes
 	 */
 	std::string sMD5 = "";

@@ -98,6 +98,16 @@ void sha512wrapper::resetContext(void)
 	sha512->SHA512_Init(&context);
 }
 
+/**
+ * @brief 	This method should return the hash of the
+ * 		test-string "The quick brown fox jumps over the lazy
+ * 		dog"
+ */
+std::string sha512wrapper::getTestHash(void)
+{
+	return "07e547d9586f6a73f73fbac0435ed76951218fb7d0c8d788a309d785436bbb642e93a252a954f23912547d1e8a3b5ed6e1bfd7097821233fa0538f3db854fee6";
+}
+
 //----------------------------------------------------------------------	
 //public memberfunctions
 

@@ -106,6 +106,9 @@
  */  
 class hashwrapper
 {
+	private:
+		std::string teststring;
+
 	protected:
 
 		/**
@@ -153,12 +156,46 @@ class hashwrapper
 		 */  
 		virtual void resetContext(void) = 0;
 
+
+		/**
+		 * @brief 	This method should return the hash of the
+		 * 		test-string "The quick brown fox jumps over the lazy
+		 * 		dog"
+		 */
+		virtual std::string getTestHash(void) = 0;
+
 	public:
+
+		/**
+		 * @brief Default Konstruktor
+		 */
+		hashwrapper( void ) 
+			: teststring("The quick brown fox jumps over the lazy dog")
+		{
+		}
 
 		/**
 		 *  @brief 	Default destructor
 		 */  
 		virtual ~hashwrapper ( void ) { };
+
+		/**
+		 * @brief Method for testing the concrete implementation
+		 */
+		virtual void test( void )
+		{
+			std::string hash = this->getHashFromString(teststring);
+			std::string verify = this->getTestHash();
+			if(hash != verify)
+			{
+				throw hlException(HL_VERIFY_TEST_FAILED,
+						  "hashlib test-error: \"" + 
+						  hash +
+						  "\" is not \"" + 
+						  verify + 
+						  "\" as supposed to be.");
+			}
+		}
 
 		/**
 		 *  @brief 	This method creates a hash based on the
@@ -245,6 +282,7 @@ class hashwrapper
 			ifs.close();
 			return(hashIt());
 		}
+
 }; 
 
 //----------------------------------------------------------------------	

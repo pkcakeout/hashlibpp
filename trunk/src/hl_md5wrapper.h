@@ -114,6 +114,13 @@ class md5wrapper : public hashwrapper
 		 */  
 		virtual void resetContext(void);
 
+		/**
+		 * @brief 	This method should return the hash of the
+		 * 		test-string "The quick brown fox jumps over the lazy
+		 * 		dog"
+		 */
+		virtual std::string getTestHash(void);
+
 	public:
 
 		/**

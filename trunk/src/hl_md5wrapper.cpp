@@ -127,6 +127,16 @@ void md5wrapper::resetContext(void)
 	md5->MD5Init(&ctx);
 }
 
+/**
+ * @brief 	This method should return the hash of the
+ * 		test-string "The quick brown fox jumps over the lazy
+ * 		dog"
+ */
+std::string md5wrapper::getTestHash(void)
+{
+	return "9e107d9d372bb6826bd81d3542a419d6";
+}
+
 //---------------------------------------------------------------------- 
 //public member functions
 
