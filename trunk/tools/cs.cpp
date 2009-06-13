@@ -37,7 +37,15 @@
  *
  * usage:
  *
- * [-s string] [-f filename]       
+ * [-s string] [-f filename] [-h <hashfunction>]       
+ *
+ * where <hashfunction> is one of the support hashfunctions:
+ * md5
+ * sha1
+ * sha256
+ * sha384
+ * sha512
+ *
  *
  * Benjamin Grüdelbach
  * 
@@ -113,23 +121,6 @@ int main ( int argc, char **argv)
 	hashwrapper *sha256 = new sha256wrapper();
 	hashwrapper *sha384 = new sha384wrapper();
 	hashwrapper *sha512 = new sha512wrapper();
-
-	/*
-	 * Test the implementations
-	 */
-	try
-	{
-		md5->test();
-		sha1->test();
-		sha256->test();
-		sha384->test();
-		sha512->test();
-	}
-	catch(hlException &e)
-	{
-		std::cerr << e.error_message() << std::endl;
-		return(-1);
-	}
 
 	/*
 	 * these strings will hold our hashes

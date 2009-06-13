@@ -39,6 +39,10 @@
 #define HASHLIBPP_H
 
 //----------------------------------------------------------------------
+//current version of hashilb++
+#define _HASHLIBPP_VERSION_ "0.3.2"
+
+//----------------------------------------------------------------------
 
 #include "hl_hashwrapper.h"
 #include "hl_md5wrapper.h"
