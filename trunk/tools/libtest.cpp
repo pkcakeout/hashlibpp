@@ -62,7 +62,7 @@ int main ( int argc, char **argv)
 	testWrapper(new md5wrapper());
 	std::cout << std::endl;
 	std::cout << "--> sha1..."; 
-		testWrapper(new sha1wrapper());
+	testWrapper(new sha1wrapper());
 	std::cout << std::endl;
 	std::cout << "--> sha256..."; 
 	testWrapper(new sha256wrapper());
