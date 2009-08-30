@@ -79,7 +79,7 @@ class sha512wrapper : public hashwrapper
 			/**
 			 * SHA512 context
 			 */
-			SHA512_CTX context;
+			HL_SHA512_CTX context;
 
 			/**
 			 *  @brief 	This method ends the hash process

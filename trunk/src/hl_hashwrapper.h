@@ -107,7 +107,7 @@
 class hashwrapper
 {
 	private:
-		std::string teststring;
+		const std::string teststring;
 
 	protected:
 

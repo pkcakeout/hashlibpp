@@ -79,7 +79,7 @@ class md5wrapper : public hashwrapper
 		/**
 		 * MD5 context
 		 */
-		MD5_CTX ctx;
+		HL_MD5_CTX ctx;
 	
 		/**
 		 *  @brief 	This method ends the hash process

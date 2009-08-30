@@ -80,7 +80,7 @@ class sha384wrapper : public hashwrapper
 			/**
 			 * SHA384 context
 			 */
-			SHA384_CTX context;
+			HL_SHA_384_CTX context;
 
 			/**
 			 *  @brief 	This method ends the hash process

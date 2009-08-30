@@ -79,7 +79,7 @@ class sha256wrapper : public hashwrapper
 			/**
 			 * SHA256 context
 			 */
-			SHA256_CTX context;
+			HL_SHA256_CTX context;
 
 			/**
 			 *  @brief 	This method ends the hash process

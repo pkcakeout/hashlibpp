@@ -29,7 +29,7 @@
 //----------------------------------------------------------------------	
 
 #include <iostream>
-#include "hashlibpp.h"
+#include <hashlibpp.h>
 
 int main ( int argc, char **argv, char **env)
 {

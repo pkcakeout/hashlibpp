@@ -74,7 +74,7 @@ class sha1wrapper : public hashwrapper
 			/*
 			 * SHA1 context
 			 */
-			SHA1_CTX context;
+			HL_SHA1_CTX context;
 
 			/**
 			 *  @brief 	This method ends the hash process

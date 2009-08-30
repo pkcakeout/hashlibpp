@@ -53,7 +53,8 @@ typedef enum hlerrors
 {
 	HL_NO_ERROR = 0,
 	HL_FILE_READ_ERROR,
-	HL_VERIFY_TEST_FAILED
+	HL_VERIFY_TEST_FAILED,
+	HL_UNKNOWN_SEE_MSG
 } hlerror;
 
 //----------------------------------------------------------------------
@@ -86,6 +87,16 @@ class hlException
 			hlException(hlerror er, std::string m)
 			{
 				this->iError = er;
+				this->strMessge = m;
+			}
+
+			/**
+			 *  @brief 	constructor
+			 *  @param	m	Error Message
+			 */  
+			hlException(std::string m)
+			{
+				this->iError = HL_UNKNOWN_SEE_MSG;
 				this->strMessge = m;
 			}
 

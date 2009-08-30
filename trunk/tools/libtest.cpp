@@ -100,6 +100,8 @@ void testWrapper(hashwrapper *w)
 	{
 		std::cout << "test failed.";
 		okay = false;
+		delete w;
+		w=0;
 	}
 }
 
