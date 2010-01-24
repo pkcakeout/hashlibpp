@@ -1,7 +1,7 @@
 # 
 # hashlib++ - a simple hash library for C++
 # 
-# Copyright (c) 2007,2008,2009 Benjamin Grüdelbach
+# Copyright (c) 2007-2010 Benjamin Grüdelbach
 # 
 # Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
@@ -33,9 +33,6 @@
 # Type 'make' to build the lib.
 # Type 'make install' to build and install the lib.
 # Type 'make clean' to clean the object files
-# Type 'make test' _AFTER_ installing to build the libtest.cpp test
-# application. The executable will be named a.out(UNIX) or 
-# a.exe(Mingw-MYSYS/Windows)
 #
 # Note for FreeBSD users:
 # use gmake from "/usr/ports/devel/gmake"
