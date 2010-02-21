@@ -73,7 +73,7 @@ std::string md5wrapper::hashIt(void)
  *  @param 	data The hash-data to covert into HEX
  *  @return	the converted data as std::string
  */  
-std::string md5wrapper::convToString(unsigned char *bytes)
+std::string md5wrapper::convToString(unsigned char *data)
 {
 	/*
 	 * using a ostringstream to convert the hash in a
@@ -95,7 +95,7 @@ std::string md5wrapper::convToString(unsigned char *bytes)
 		/*
 		 * conv to hex
 		 */
-		os << std::hex << static_cast<unsigned int>(bytes[i]);
+		os << std::hex << static_cast<unsigned int>(data[i]);
 	}
 
 	/*

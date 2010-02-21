@@ -1,12 +1,12 @@
 
 hashlib++ - a simple hash library for C++
-Copyright (c) 2007,2008 Benjamin Grüdelbach
+Copyright (c) 2007-2010 Benjamin Grüdelbach
 
 About this document:
-This document explains the basics of the hashlib++ library.  You should read this
-stuff if you are new to hashlib++.
+This document explains the basics of the hashlib++ library. 
+You should read this stuff if you are new to hashlib++.
 
-MI  17 Feb 2008 
+MO 18 Jan 2010
 
 -------------------------------------------------------------------------------	
 
@@ -15,7 +15,7 @@ Table of contents:
 0) About hashlib++
 1) Current version / What's new?
 2) Supported hash functions  
-3) Installing hashlib++
+3) Building hashlib++
 4) The structure of hashlib++
 5) The library's files
 6) Using hashlib++
@@ -37,16 +37,17 @@ section 8) and therefore free software.
 
 1) Current version / What's new?
 
-The current stable version of hashlib++ is:  0.3.1
+The current stable version of hashlib++ is:  0.3.2
 
-Improvements for hashlib++ version 0.3.1:
+Improvements for hashlib++ version 0.3.2:
 
-	Version 0.3.1 is basicly a bugfix release.
-
-	* Added hl_types.h which defines basic typdefs to avoid
-	  compile-errors on some systems.
-	* Added DEBUG flag to the Unix-Makefile
-	* Added hashlibpp.h which is just an include-wrapper. 
+	* BUGFIX on 64-Bit Systems: hashlib++ runs finally stable there.
+	* Added test functions to test the implementations on the target system
+	  at run time.
+	* Renamed hashlib++ internal typedefs in order to fix typedef conflicts
+	  with OpenSSL and others. 
+	* Re-Added the Makefile to build hashlib++ as static library on UNIX-
+	  like systems.
 
 -------------------------------------------------------------------------------	
 
@@ -59,38 +60,45 @@ By now hashlib++ supports the following functions:
 	* SHA2-Family 	Secure Hash Algorithm 256, 384 and 512
 
 -------------------------------------------------------------------------------	
-3) Installing hashlib++
+3) Building hashlib++
 
-Windows:
+To use hashlib++ you have one of the following options:
 
-	For Windows user it is recommend to download the binary setup program
-	"Setup.exe" which will install hashlib++ as a static library to your
-	system.
+	3.1) Using hashlib++ as a source code library
 
-	Run Setup.exe and read the license agreements. If you agree click on
-	"I Agree" and choose a destination folder for hashlib++ within the
-	following page. Finally, click on "Install" to start the installation.
+ 		hashlib++ comes as a source code library. You can add the 
+		files (or only those you need) to your project as you like and 
+		compile it.
 
-Linux/FreeBSD:
+     	3.2) Using hashlib++ as static library 
+
+		You can also build hashlib++ as a static library and integrate this 
+		library into your build process. 
+		
+		If you are using a UNIX-like operating system (like Linux, FreeBSD ...)
+		you can use the Makefile in the src-directory to build hashlib++
+		as a static library. 
+		Before you start, you should jump into the Makefile an edit some
+		settings to meet your needs:
+		While INCLUDE_PATH is the path where the header files will be
+		installed, LIB_PATH is the path where the static library will 
+		be installed.
+		* Type 'make' to build the library.
+		* Type 'make install' to build and install the library.
+		* Type 'make clean' to clean the object files.
+		(On FreeBSD you need gmake)
+
+		If you are using a Windows operating system, you can create 
+		a new blank project (for example in Visual Studio), add the
+		hashlib++ source files and compile everything as library.
+		Of cause you can also use the Unix-Makefile within Cygwin.
 	
-	Download the source tarball and untar it. Make sure that g++ is installed
-       	and in you $PATH. Switch to the "src" directory and have a look at the 
-	makefile. hashlib++ will be compiled and installed as a static library.
-       	The headerfiles will be placed into /usr/local/include and the library
-       	itself (libhl++.a) will be installed into /usr/local/lib by default.
-	You can change the default paths by editing "INCLUDE_PATH" and/or 
-	"LIB_PATH" in line 44 and 47 of the makefile to meet your needs.
-
-	Now type 'make' to build hashlib++ as a static library and
-	'make install' to install hashlib++ into LIB_PATH and INCLUDE_PATH. 
-	Type 'make clean' to clean up the *.o files. 
-	
-Alternative use for Windows, Linux and FreeBSD:
-
-	By default hashlib++ will be installed as a static library and you can
-	link your application against it. If you don't want that you can 
-	alternatively add all source and header files (or only those you need)
-	to your project and compile them with your application.
+	3.3) Other possibilities
+		
+		Another option is to build hashlib++ as a shared library /
+		dynamic link library. Just integrate hashlib++ into your
+		build process as you like!
+		
 
 -------------------------------------------------------------------------------	
 
@@ -99,7 +107,7 @@ Alternative use for Windows, Linux and FreeBSD:
 hashlib++ provides so called "wrappers" for each supported hash function which
 simplify the creation of the relevant hash. Instead of implementing the full
 algorithm for the hash function you only have to instantiate a desired wrapper
-and call a memberfunction like getHashFromString() or getHashFromFile().  
+and call a member function like getHashFromString() or getHashFromFile().  
 
 The wrappers:
 
@@ -116,15 +124,19 @@ The wrappers:
 
 The library consist of the the following files:
 
+	* Makefile 
+	  The Unix Makefile to build hashlib++ as 
+	  static library on UNIX-like systems.
+
 	* hashlibpp.h
 	  Basic include-file. Include this file to 
 	  access hashlib++. 
 
-	* hl_hashwrapper.h
-	  This is a baseclass of all wrappers.
-
 	* hl_exception.h
-	  Class for error-handling.
+	  Exception-Class for error-handling.
+
+	* hl_hashwrapper.h
+	  This is a base class of all wrappers.
 
 	* hl_md5.h and hl_md5.cpp
 	  These two files implement the MD5 algorithm. 
@@ -157,60 +169,58 @@ The library consist of the the following files:
 
 	* hl_sha512wrapper.h and hl_sha512wrapper.cpp
 	  The wrapper class for SHA512.
-	
-	* libtest.cpp
-	  This is a example program which shows how to 
-	  use hashlib++. The program expected a filename
-	  or a string and creates the hashes of the given
-	  file or characters.
 
+	* hl_types.h
+	  Contains internal typedefs.
+	
 -------------------------------------------------------------------------------	
 
 6) Using hashlib++
 
-This section explains how to create a hash with the help of hashlib++.  First of
-all you have to include hashlibpp.h:
+Using hashlib++ is very easy. First you have to include the header file of the 
+wrapper you want to use. The simplest way is to include "hashlibpp.h".
 
 	#include <hashlibpp.h>
 
-After that you can create wrapper objects:
+or
 
-	hashwrapper *md5 = new md5wrapper();
-	hashwrapper *sha1 = new sha1wrapper();
+	#include "hashlibpp.h"
 
-Once a wrapper has been instantiated, you can basically call the memberfunctions
-getHashFromFile() and getHashFromString() to create a hash from a file or
-string.
+Now you are ready to create a wrapper object, for example a MD5-Wrapper:
 
+	hashwrapper *myWrapper = new md5wrapper();
+
+If you like you can perform an optional test to check if the wrapper works fine
+on the target system, by calling the test function:
+	
 	try
 	{
-		std::string mytexthash = md5->getHashFromString("Hello World");
-		std::string myfilehash = md5->getHashFromFile("README.TXT");
+		myWrapper->test();
 	}
 	catch(hlException &e)
 	{
-		// your error handling here.
-		// use: e.error_number() and
-		//      e.error_message()	
+		//your error handling here 
 	}
-		
 
-And that's all! 
+If everything worked fine you can create a hash based on a string or a file:
 
-	delete md5;
-	delete sha1;
+	try
+	{
+		std::cout << myWrapper->getHashFromString("Hello world") << std::endl;
+		std::cout << myWrapper->getHashFromFile("/etc/motd") << std::endl;
+	}
+	catch(hlException &e)
+	{
+		//your error handling here
+	}
 
-Now you can compile your project. Don't forget to link against hashlib++,
-if you use it as a static library.
-If you are on Linux/FreeBSD/etc. you probably want to build your application
-using g++. For example:
 
-	g++ -I/usr/local/include -L/usr/local/lib libtest.cpp -lhl++
+Don't forget to clean up (or create the wrapper on the stack)
 
-If you are using Windows and Visual C++ you can easily add the library to your 
-project by using "Project -> Add Existing Item".
+	delete myWrapper;
+	myWrapper = NULL;
 
-For other compilers or IDEs please see the specific documentation of the vendor. 
+More examples can be found in the "tools"-directory.
 
 -------------------------------------------------------------------------------	
   
@@ -222,7 +232,7 @@ which are official supported:
 
 	FreeBSD 6.2 with g++ 3.4.6 and 4.1.3
 	Microsoft Windows XP with Microsoft Visual C++ 2005 Express Edition
-	Gnu/Linux 2.6 with g++ 3.4.6
+	Gnu/Linux 2.6 with g++ 3.4.6 and 4.3.4
 
 -------------------------------------------------------------------------------	
 
@@ -230,7 +240,7 @@ which are official supported:
 
 hashlib++ - a simple hash library for C++
 
-Copyright (c) 2007,2008 Benjamin Grüdelbach
+Copyright (c) 2007-2010 Benjamin Grüdelbach
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:

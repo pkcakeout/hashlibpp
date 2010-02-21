@@ -34,6 +34,7 @@
 int main ( int argc, char **argv, char **env)
 {
 	hashwrapper *h = new md5wrapper();
+	h->test();
 	std::string md5 = h->getHashFromString("hello world");
 	std::cout << md5 << std::endl;
 	delete h;

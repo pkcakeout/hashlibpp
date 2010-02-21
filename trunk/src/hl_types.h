@@ -57,8 +57,8 @@ typedef unsigned short int 	hl_uint16;
 typedef unsigned int hl_uint32;
 
 /**
- * at least 8 Byte
- */
+* at least 8 Byte
+*/
 #ifdef __GNUC__
 	typedef unsigned long long int	hl_uint64;
 #elif __MINGW32__
