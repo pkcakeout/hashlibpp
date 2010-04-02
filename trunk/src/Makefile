@@ -155,6 +155,8 @@ LIB:		MD5 SHA1 SHA256
 #----------------------------------------------------------------------- 
 #Installing the lib
 install:	all 
+		mkdir -p $(INCLUDE_PATH); \
+		mkdir -p $(LIB_PATH); \
 		cp libhl++.a $(LIB_PATH) && \
 		cp $(HEADER) $(INCLUDE_PATH)
 		-@ echo ""
