@@ -1,7 +1,7 @@
 /* 
  * hashlib++ - a simple hash library for C++
  * 
- * Copyright (c) 2007,2008,2009 Benjamin Grüdelbach
+ * Copyright (c) 2007-2010 Benjamin Grüdelbach
  * 
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
@@ -184,7 +184,7 @@ void printUsage (void)
 	std::cerr << "-h\t Hashfunction to use: md5,sha1,sha256,sha384,sha512." << std::endl;
 	std::cerr << std::endl;
  	std::cerr << "hashlib++ - a simple hash library for C++" <<std::endl;
-	std::cerr << "Copyright (c) 2007,2008,2009 Benjamin Grüdelbach" <<std::endl;
+	std::cerr << "Copyright (c) 2007,2008,2009,2010 Benjamin Grüdelbach" <<std::endl;
 	std::cerr << std::endl;
 }
 
