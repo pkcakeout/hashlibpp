@@ -6,7 +6,7 @@ About this document:
 This document explains the basics of the hashlib++ library. 
 You should read this stuff if you are new to hashlib++.
 
-MO 18 Jan 2010
+Apr 2010
 
 -------------------------------------------------------------------------------	
 
@@ -42,7 +42,7 @@ The current stable version of hashlib++ is:  0.3.2
 Improvements for hashlib++ version 0.3.2:
 
 	* BUGFIX on 64-Bit Systems: hashlib++ runs finally stable there.
-	* Added test functions to test the implementations on the target system
+	* Added test functions to test the hash-implementations on the target system
 	  at run time.
 	* Renamed hashlib++ internal typedefs in order to fix typedef conflicts
 	  with OpenSSL and others. 
@@ -68,11 +68,11 @@ To use hashlib++ you have one of the following options:
 
  		hashlib++ comes as a source code library. You can add the 
 		files (or only those you need) to your project as you like and 
-		compile it.
+		compile it. That's all!
 
      	3.2) Using hashlib++ as static library 
 
-		You can also build hashlib++ as a static library and integrate this 
+		Another option is to to use hashlib++ as a static library and integrate this 
 		library into your build process. 
 		
 		If you are using a UNIX-like operating system (like Linux, FreeBSD ...)
@@ -93,12 +93,6 @@ To use hashlib++ you have one of the following options:
 		hashlib++ source files and compile everything as library.
 		Of cause you can also use the Unix-Makefile within Cygwin.
 	
-	3.3) Other possibilities
-		
-		Another option is to build hashlib++ as a shared library /
-		dynamic link library. Just integrate hashlib++ into your
-		build process as you like!
-		
 
 -------------------------------------------------------------------------------	
 
@@ -106,7 +100,7 @@ To use hashlib++ you have one of the following options:
 
 hashlib++ provides so called "wrappers" for each supported hash function which
 simplify the creation of the relevant hash. Instead of implementing the full
-algorithm for the hash function you only have to instantiate a desired wrapper
+algorithm for the hash function you only need to instantiate a desired wrapper
 and call a member function like getHashFromString() or getHashFromFile().  
 
 The wrappers:
@@ -177,20 +171,15 @@ The library consist of the the following files:
 
 6) Using hashlib++
 
-Using hashlib++ is very easy. First you have to include the header file of the 
-wrapper you want to use. The simplest way is to include "hashlibpp.h".
+Using hashlib++ is very easy. First you have to include the hashlib++ header file :
 
 	#include <hashlibpp.h>
-
-or
-
-	#include "hashlibpp.h"
 
 Now you are ready to create a wrapper object, for example a MD5-Wrapper:
 
 	hashwrapper *myWrapper = new md5wrapper();
 
-If you like you can perform an optional test to check if the wrapper works fine
+If you like you can perform a test to check if the wrapper works fine
 on the target system, by calling the test function:
 	
 	try
@@ -220,7 +209,16 @@ Don't forget to clean up (or create the wrapper on the stack)
 	delete myWrapper;
 	myWrapper = NULL;
 
-More examples can be found in the "tools"-directory.
+More examples can be found in the "tools"-directory: 
+
+	* tools/hello.cpp
+	  Prints "Hello World" as MD5 to stdout.
+
+	* tools/h.cpp 
+	  A commandline tool to create checksums.
+
+	* tools/libtest.cpp
+	  Performs a Test for every supported hash function.
 
 -------------------------------------------------------------------------------	
   
