@@ -10,8 +10,7 @@ Apr 2010
 
 -------------------------------------------------------------------------------	
 
-Table of contents:
-
+Table of contents: 
 0) About hashlib++
 1) Current version / What's new?
 2) Supported hash functions  
@@ -86,7 +85,10 @@ To use hashlib++ you have one of the following options:
 		* Type 'make' to build the library.
 		* Type 'make install' to build and install the library.
 		* Type 'make clean' to clean the object files.
-		(On FreeBSD you need gmake)
+		  (On FreeBSD you need gmake)
+		The name of the lib will be libhl++.a so you have to link
+		against hl++. For example like 
+		 	g++ h.cpp -I/usr/include/hashlib++/ -lhl++
 
 		If you are using a Windows operating system, you can create 
 		a new blank project (for example in Visual Studio), add the
