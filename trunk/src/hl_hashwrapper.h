@@ -80,7 +80,6 @@
 //C includes
 //#include <stdio.h>
 #include <fstream>
-#include <iostream>
 
 //----------------------------------------------------------------------	
 //hashlib++ includes
@@ -249,7 +248,7 @@ class hashwrapper
 		 */  
 		virtual std::string getHashFromFile(std::string filename)
 		{
-			std::ifstream ifs;
+			FILE *file;
 			int len;
 			unsigned char buffer[1024];
 
@@ -261,8 +260,7 @@ class hashwrapper
 			/*
 			 * open the specified file
 			 */
-			ifs.open(filename.c_str());
-			if( ! ifs.is_open() )
+			if((file = fopen(filename.c_str(), "rb")) == NULL)
 			{
 				throw hlException(HL_FILE_READ_ERROR,
 						  "Cannot read file \"" + 
@@ -274,12 +272,13 @@ class hashwrapper
 			 * read the file in 1024b blocks and
 			 * update the context for every block
 			 */
-			while( (len = ifs.readsome((char*)buffer,1024)))
+			while( (len = fread(buffer,1,1024,file)) )
 			{
 				updateContext(buffer, len);
 			}
 
-			ifs.close();
+			//close the file and create the hash
+			fclose(file);
 			return(hashIt());
 		}
 }; 
