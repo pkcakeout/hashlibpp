@@ -59,7 +59,6 @@
 //----------------------------------------------------------------------	
 //prototypes
 void printUsage (void);
-hashwrapper* factoryMethod(std::string htype);
 
 //----------------------------------------------------------------------	
 
@@ -113,8 +112,9 @@ int main ( int argc, char **argv)
 
         //--------------------------------------------------------------
 	
-	//Create the wrapper using a simple factory-method
-	hashwrapper *hw = factoryMethod(strHashType);
+	//Create the wrapper using a the factory
+	wrapperfactory factory;
+	hashwrapper *hw = factory.create(strHashType);
 	if( hw != NULL)
 	{
 		try
@@ -184,23 +184,8 @@ void printUsage (void)
 	std::cerr << "-h\t Hashfunction to use: md5,sha1,sha256,sha384,sha512." << std::endl;
 	std::cerr << std::endl;
  	std::cerr << "hashlib++ - a simple hash library for C++" <<std::endl;
-	std::cerr << "Copyright (c) 2007,2008,2009,2010 Benjamin Grüdelbach" <<std::endl;
+	std::cerr << "Copyright (c) 2007-2011 Benjamin Grüdelbach" <<std::endl;
 	std::cerr << std::endl;
-}
-
-hashwrapper* factoryMethod(std::string htype)
-{
-	if( htype == "md5" )
-		return new md5wrapper();
-	else if( htype == "sha1")
-		return new sha1wrapper();
-	else if( htype == "sha256")
-		return new sha256wrapper();
-	else if( htype == "sha384")
-		return new sha384wrapper();
-	else if( htype == "sha512")
-		return new sha512wrapper();
-	return NULL;
 }
 
 //----------------------------------------------------------------------	

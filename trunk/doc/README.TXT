@@ -134,6 +134,9 @@ The library consist of the the following files:
 	* hl_hashwrapper.h
 	  This is a base class of all wrappers.
 
+	* hl_wrapperfactory.h
+	  This is a simple factory for creating wrappers
+
 	* hl_md5.h and hl_md5.cpp
 	  These two files implement the MD5 algorithm. 
 	
@@ -180,6 +183,12 @@ Using hashlib++ is very easy. First you have to include the hashlib++ header fil
 Now you are ready to create a wrapper object, for example a MD5-Wrapper:
 
 	hashwrapper *myWrapper = new md5wrapper();
+
+Another way to create wrappers is to use the wrapperfactory:
+	
+	wrapperfactory factory;
+	hashwrapper *foo = factory.create("md5");
+	hashwrapper *bar = factory.create(HL_MD5);
 
 If you like you can perform a test to check if the wrapper works fine
 on the target system, by calling the test function:
@@ -240,7 +249,7 @@ which are official supported:
 
 hashlib++ - a simple hash library for C++
 
-Copyright (c) 2007-2010 Benjamin Grüdelbach
+Copyright (c) 2007-2011 Benjamin Grüdelbach
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:

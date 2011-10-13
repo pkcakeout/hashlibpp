@@ -69,13 +69,14 @@ GCC = $(COMPILER) $(COPTIONS)
 
 #----------------------------------------------------------------------- 
 #Main-Target
-all:		MD5 SHA1 SHA256 SHA2EXT LIB
+all:		MD5 SHA1 SHA256 SHA2EXT CORE LIB
 
 #----------------------------------------------------------------------- 
 #all header-files
 
 		
 HEADER = 	hl_hashwrapper.h \
+		hl_wrapperfactory.h \
 		hl_exception.h \
 		hl_md5.h hl_md5wrapper.h \
 		hl_sha1.h hl_sha1wrapper.h \
@@ -84,6 +85,13 @@ HEADER = 	hl_hashwrapper.h \
 		hl_sha2ext.h hl_sha384wrapper.h  hl_sha512wrapper.h \
 		hl_types.h \
 		hashlibpp.h
+
+#----------------------------------------------------------------------- 
+CORE = 		hl_wrapperfactory.o
+CORE:		hl_wrapperfactory.o
+
+hl_wrapperfactory.o:	hl_wrapperfactory.cpp hl_wrapperfactory.h
+			$(GCC) -c hl_wrapperfactory.cpp
 		
 #----------------------------------------------------------------------- 
 # MD5 Targets
@@ -150,7 +158,7 @@ hl_sha512wrapper.o:	hl_sha512wrapper.cpp hl_sha512wrapper.h
 # Creating a static lib using ar
 
 LIB:		MD5 SHA1 SHA256			
-		ar rs libhl++.a $(MD5) $(SHA1) $(SHA256) $(SHA2EXT)
+		ar rs libhl++.a $(MD5) $(SHA1) $(SHA256) $(SHA2EXT) $(CORE)
 
 #----------------------------------------------------------------------- 
 #Installing the lib

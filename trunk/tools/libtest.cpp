@@ -57,9 +57,13 @@ int main ( int argc, char **argv)
 	std::cout << "hashlib++ version: " << _HASHLIBPP_VERSION_ << std::endl;
 	std::cout << "Now testing hashlib++ on your system:" << std::endl;
 
+	wrapperfactory f;
+	
+
 	std::cout << std::endl;
 	std::cout << "--> md5..."; 
-	testWrapper(new md5wrapper());
+	//testWrapper(new md5wrapper());
+	testWrapper(f.create(HL_MD5));
 	std::cout << std::endl;
 	std::cout << "--> sha1..."; 
 	testWrapper(new sha1wrapper());
