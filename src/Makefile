@@ -1,7 +1,7 @@
 # 
 # hashlib++ - a simple hash library for C++
 # 
-# Copyright (c) 2007,2008 Benjamin Grüdelbach
+# Copyright (c) 2007-2010 Benjamin Grüdelbach
 # 
 # Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
@@ -33,9 +33,6 @@
 # Type 'make' to build the lib.
 # Type 'make install' to build and install the lib.
 # Type 'make clean' to clean the object files
-# Type 'make test' _AFTER_ installing to build the libtest.cpp test
-# application. The executable will be named a.out(UNIX) or 
-# a.exe(Mingw-MYSYS/Windows)
 #
 # Note for FreeBSD users:
 # use gmake from "/usr/ports/devel/gmake"
@@ -47,16 +44,16 @@
 # Edit the following lines to meet your needs
 
 # Path to install the headerfiles
-INCLUDE_PATH = /usr/local/include/
+INCLUDE_PATH ?= /usr/include/hashlib++
 
 # Path to install the library
-LIB_PATH = /usr/local/lib/
+LIB_PATH ?= /usr/local/lib/
 
 # Compiler to use
-COMPILER = g++
+COMPILER ?= g++
 
 # Global options for the compiler
-COPTIONS = -ansi -Wall -Wextra
+COPTIONS ?= -ansi -Wall -Wextra -fPIC
 
 #----------------------------------------------------------------------- 
 # DON'T CHANGE ANYTHING BELOW
@@ -68,17 +65,18 @@ else
 	COPTIONS += -O3 -fomit-frame-pointer
 endif
 
-GCC = $(COMPILER) $(COPTIONS)
+GCC ?= $(COMPILER) $(COPTIONS)
 
 #----------------------------------------------------------------------- 
 #Main-Target
-all:		MD5 SHA1 SHA256 SHA2EXT LIB
+all:		MD5 SHA1 SHA256 SHA2EXT CORE LIB
 
 #----------------------------------------------------------------------- 
 #all header-files
 
-		
+
 HEADER = 	hl_hashwrapper.h \
+		hl_wrapperfactory.h \
 		hl_exception.h \
 		hl_md5.h hl_md5wrapper.h \
 		hl_sha1.h hl_sha1wrapper.h \
@@ -87,7 +85,14 @@ HEADER = 	hl_hashwrapper.h \
 		hl_sha2ext.h hl_sha384wrapper.h  hl_sha512wrapper.h \
 		hl_types.h \
 		hashlibpp.h
-		
+
+#----------------------------------------------------------------------- 
+CORE = 		hl_wrapperfactory.o
+CORE:		hl_wrapperfactory.o
+
+hl_wrapperfactory.o:	hl_wrapperfactory.cpp hl_wrapperfactory.h
+			$(GCC) -c hl_wrapperfactory.cpp
+
 #----------------------------------------------------------------------- 
 # MD5 Targets
 
@@ -135,9 +140,9 @@ hl_sha256wrapper.o:	hl_sha256wrapper.cpp hl_sha256wrapper.h
 
 SHA2EXT = 	hl_sha2ext.o \
 		hl_sha384wrapper.o \
-		hl_sha512wrapper.o 
+		hl_sha512wrapper.o
 
-		
+
 SHA2EXT:	hl_sha2ext.o hl_sha384wrapper.o hl_sha512wrapper.o
 
 hl_sha2ext.o:	hl_sha2ext.cpp hl_sha2ext.h hl_sha2mac.h
@@ -152,12 +157,14 @@ hl_sha512wrapper.o:	hl_sha512wrapper.cpp hl_sha512wrapper.h
 #----------------------------------------------------------------------- 
 # Creating a static lib using ar
 
-LIB:		MD5 SHA1 SHA256			
-		ar rs libhl++.a $(MD5) $(SHA1) $(SHA256) $(SHA2EXT)
+LIB:		MD5 SHA1 SHA256
+		ar rs libhl++.a $(MD5) $(SHA1) $(SHA256) $(SHA2EXT) $(CORE)
 
 #----------------------------------------------------------------------- 
 #Installing the lib
-install:	all 
+install:	all
+		mkdir -p $(INCLUDE_PATH); \
+		mkdir -p $(LIB_PATH); \
 		cp libhl++.a $(LIB_PATH) && \
 		cp $(HEADER) $(INCLUDE_PATH)
 		-@ echo ""
@@ -169,19 +176,6 @@ install:	all
 		-@ echo "library files: $(LIB_PATH)"
 		-@ echo ""
 		-@ echo "------------------------------"
-
-#----------------------------------------------------------------------- 
-#testing the lib
-#The executable will be named a.out(UNIX) or a.exe(Mingw-MYSYS/Windows)
-test:		
-		-@ echo ""
-		-@ echo "Trying to compile the test-application (a.out/a.exe)..."
-		$(GCC) -Wall -Wextra \
-		       -I$(INCLUDE_PATH) -L$(LIB_PATH) \
-		       	libtest.cpp -lhl++
-		-@ echo ""
-		-@ echo "Test-application built succesful"
-		-@ echo ""
 
 #----------------------------------------------------------------------- 
 # Cleaning object-files
