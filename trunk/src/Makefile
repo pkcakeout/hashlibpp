@@ -44,16 +44,16 @@
 # Edit the following lines to meet your needs
 
 # Path to install the headerfiles
-INCLUDE_PATH = /usr/include/hashlib++
+INCLUDE_PATH ?= /usr/include/hashlib++
 
 # Path to install the library
-LIB_PATH = /usr/local/lib/
+LIB_PATH ?= /usr/local/lib/
 
 # Compiler to use
-COMPILER = g++
+COMPILER ?= g++
 
 # Global options for the compiler
-COPTIONS = -ansi -Wall -Wextra
+COPTIONS ?= -ansi -Wall -Wextra -fPIC
 
 #----------------------------------------------------------------------- 
 # DON'T CHANGE ANYTHING BELOW
@@ -65,7 +65,7 @@ else
 	COPTIONS += -O3 -fomit-frame-pointer
 endif
 
-GCC = $(COMPILER) $(COPTIONS)
+GCC ?= $(COMPILER) $(COPTIONS)
 
 #----------------------------------------------------------------------- 
 #Main-Target
